@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>word checker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body ng-app="wordCheckerAppp" style="height: 100%;">
+<!--헤더 영역-->
+<app-header></app-header>
+<!--/헤더 영역-->
+
+<!-- 컨텐츠 영역 -->
+<section ng-controller="wordCheckerContoroller" class="d-flex justify-content-center mt-5 mb-5">
+    <div ng-view></div>
+    <!-- 라우팅 중 처리 -->
+    <div ng-show="isLoading"></div>
+</section>
+<!-- /컨텐츠 영역 -->
+
+<!--하단 영역-->
+<app-footer></app-footer>
+<!--/하단 영역-->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="/js/vendor/angular.min.js"></script>
+    <script src="/js/vendor/angular-route.min.js"></script>
+    <script>
+        angular.module('wordCheckerAppp', ['ngRoute'])
+        .controller('wordCheckerContoroller', function($scope){
+            //
+            $scope.title = '단어등록';
+
+            //
+            $scope.wordCnt = 1;
+            $scope.wordList = [{
+                speling: "",
+                meaning: ""
+            }];
+            
+            $scope.changeWordCnt = function(){
+                if(isNaN(parseInt($scope.wordCnt)) || $scope.wordCnt < 1){
+                    $scope.wordCnt = 1; 
+                }
+
+                var calc = $scope.wordCnt - $scope.wordList.length;
+                if(calc > 0){
+                    for(let i=0; i<calc; i++){
+                        let temp = {speling: "", meaning: ""};
+                        $scope.wordList.push(temp);
+                    }
+                }else if(calc < 0){
+                    for(let i=0; i<(calc*-1); i++){
+                        $scope.wordList.pop();
+                    }
+                }
+            }
+        })
+        .controller('MainController', function($rootScope){
+            $rootScope.isLoading = false;
+        })
+        .controller('BoardController', function($scope){
+            $scope.title = '게시판';
+        })
+        .config(function($routeProvider){
+            $routeProvider
+            .when('/', {
+                template: '<h4>메인 템플릿</h4>'
+            })
+            .when('/word/add', {
+                templateUrl: 'tmp.word/add.html',
+                controller: 'wordCheckerContoroller'
+            })
+        })
+        .run(function($rootScope){
+            $rootScope.$on('$routeChangeStart', function(e, curr, prev){
+                $rootScope.isLoading = true;
+            });
+            $rootScope.$on('$routeChangeSuccess', function(e, curr, prev){
+                $rootScope.isLoading = false;
+            });
+        })
+        .directive('appHeader', function () {  
+            return {
+                restrict: 'E',
+                templateUrl: 'header.html'
+            };
+        })
+        .directive('appFooter', function () {  
+            return {
+                restrict: 'E',
+                templateUrl: 'footer.html'
+            };
+        })
+    </script>
+</body>
+</html>
