@@ -1,0 +1,28 @@
+<div class="media-word-content ml-3 mr-3 border p-5 mb-80px bg-white">
+    <div class="mt-5 mb-5 rounded-sm">
+        <h4 class="text-center"><i class="fas fa-list"></i>&nbsp;&nbsp;단어 목록</h4>
+    </div>
+
+    <div class="list form-row align-items-center mt-3 mb-3 p-3 border" ng-repeat="word in wordList" ng-click="openModifyWord(word.no);">
+        <div class="col-sm-6 col-auto mt-1">
+            <label class="sr-only" for="speling">스펠링</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">스펠링</div>
+                </div>
+                <input type="text" class="form-control bg-white" ng-model="word.speling" placeholder="철자를 입력하세요." readonly>
+            </div>
+        </div>
+        <div class="col-sm-6 col-auto mt-1">
+            <label class="sr-only" for="meaning">해석</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">해석</div>
+                </div>
+                <input type="text" class="form-control bg-white" ng-model="word.meaning" placeholder="해석을 입력하세요." readonly>
+            </div>
+        </div>
+    </div>
+    <!-- 단어 수정 모달 창-->
+    <word-modify></word-modify>
+</div>
