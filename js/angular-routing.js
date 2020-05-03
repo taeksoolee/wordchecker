@@ -3,7 +3,8 @@ export function setRouting(angularModule){
     .config(function($routeProvider){
         $routeProvider
         .when('/', {
-            template: '<h4>메인 템플릿</h4>'
+            templateUrl: 'main.html',
+            controller: 'MainController'
         })
         .when('/board', {
             templateUrl: 'tmp.board/board.html',
@@ -22,8 +23,8 @@ export function setRouting(angularModule){
             controller: 'ListWordController'
         })
         .when('/word/test', {
-            //templateUrl: 'tmp.word/list.html',
-            //controller: 'ListWordController'
+            templateUrl: 'tmp.word/test.html',
+            controller: 'TestWordController'
         })
         .when('/member/join', {
             templateUrl: 'tmp.member/join.html',
@@ -31,11 +32,11 @@ export function setRouting(angularModule){
         })
         .when('/member/login', {
             templateUrl: 'tmp.member/login.html',
-            //controller: 'ListWordController'
+            controller: 'LoginMemberController'
         })
         .when('/member/search', {
             templateUrl: 'tmp.member/search.html',
-            //controller: 'ListWordController'
+            controller: 'SearchMemberController'
         })
     })
     .run(function($rootScope){

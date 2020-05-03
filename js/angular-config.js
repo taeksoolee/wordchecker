@@ -1,5 +1,6 @@
 export const angularModule = angular.module('wordCheckerApp', ['ngRoute', 'ngAnimate'])
 .controller('MainController', function($rootScope, $scope){
+    closeNav();
     $rootScope.isLoading = false;
 
 

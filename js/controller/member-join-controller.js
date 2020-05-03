@@ -1,6 +1,7 @@
 export function joinMemberController(angularModule){
     angularModule
     .controller('JoinMemberController', function($scope){
+        closeNav();
         $scope.joinForm = {
             "email":"",
             "password":"",

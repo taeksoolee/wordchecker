@@ -1,8 +1,8 @@
 import { defaultWordList } from "../service/word-service.js"
 
-export function listWordController(angularModule){
+export function testWordController(angularModule){
     angularModule
-    .controller('ListWordController', function($scope){
+    .controller('TestWordController', function($scope){
         closeNav();
         $scope.wordList = defaultWordList;
     })
