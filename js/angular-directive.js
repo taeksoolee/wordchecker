@@ -33,4 +33,25 @@ export function setDirective(angularModule){
             controller: 'ModifyWordController'
         };
     })
+    .directive('boardAdd', function () {  
+        return {
+            restrict: 'E',
+            templateUrl: 'tmp.board/add.html',
+            controller: ''
+        };
+    })
+    .directive('boardFilter', function () {  
+        return {
+            restrict: 'E',
+            templateUrl: 'tmp.board/filter.html',
+            controller: ''
+        };
+    })
+    .directive('boardModify', function () {  
+        return {
+            restrict: 'E',
+            templateUrl: 'tmp.board/modify.html',
+            controller: ''
+        };
+    })
 }

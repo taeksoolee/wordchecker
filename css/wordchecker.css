@@ -11,6 +11,9 @@
         width: 800px !important;
         margin-bottom: 90px !important;
     }
+    .mt-lg-50p{
+       margin-top:45% !important; 
+    }
 }
 @media screen and (max-width: 992px) {
     .media-member-content {
@@ -111,4 +114,8 @@ a{
 }
 .zi-9999{
     z-index: 9999 !important;
+}
+
+.zi-99999{
+    z-index: 99999 !important;
 }

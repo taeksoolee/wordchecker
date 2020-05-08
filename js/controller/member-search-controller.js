@@ -2,8 +2,8 @@ import { setYear, setMonth, setDay } from "../service/date-service.js";
 
 export function searchMemberController(angularModule){
     angularModule
-    .controller('SearchMemberController', function($scope){
-        closeNav();
+    .controller('SearchMemberController', function($scope, utils){
+        utils.navCtrlFuncs.closeNav();
 
         // select form의 날짜 세팅
         var dateObj = {};
