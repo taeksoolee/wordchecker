@@ -13,13 +13,13 @@
                 <button type="button" class="btn btn-success">글쓰기</button>
             </div>
         </div>
-        <div class="border p-3 m-0 mb-2" ng-repeat="board in boardList">
+        <div class="border p-3 m-0 mb-2" ng-repeat="boardMember in boardMemberList">
             <div class="row">
                 <div class="col-auto mt-3 pr-0">
                     <input type="checkbox"/>
                 </div>
                 <div class="col-auto mt-3">
-                    <span class="small">[{{board.writer}}]&nbsp;{{board.date}}</span>
+                    <span class="small">[{{boardMember.member.nickname}}]&nbsp;{{boardMember.board.writeDate}}</span>
                 </div>
                 <div class="col-auto ml-auto">
                     <div class="float-right">
@@ -30,12 +30,12 @@
             </div>
             <div class="row border-bottom border-bottom-dark h-100">
                 <div class="col-auto mt-2 mb-2">
-                    <sapn>{{board.title}}</sapn>
+                    <sapn>{{boardMember.board.title}}</sapn>
                 </div>     
             </div>
             <div class="row mt-2 ">
                 <div class="col-12">
-                    <span>{{board.content}}</span>
+                    <span>{{boardMember.board.content}}</span>
                 </div>
             </div>
         </div>

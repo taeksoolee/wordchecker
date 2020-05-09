@@ -1,12 +1,10 @@
-import { defaultWordList } from "../service/word-service.js"
-
 export function addWordController(angularModule){
     angularModule
-    .controller('AddWordController', function($scope, utils){
+    .controller('AddWordController', function($scope, utils, defaultWordFactory){
         utils.navCtrlFuncs.closeNav();
         $scope.wordCnt = 1;
 
-        $scope.wordList = defaultWordList;
+        $scope.wordList = defaultWordFactory.wordList;
         
         $scope.changeWordCnt = function(){
             if(isNaN(parseInt($scope.wordCnt)) || $scope.wordCnt < 1){
@@ -25,5 +23,5 @@ export function addWordController(angularModule){
                 }
             }
         }
-    })
+    });
 }

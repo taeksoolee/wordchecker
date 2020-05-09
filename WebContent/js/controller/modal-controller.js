@@ -1,11 +1,9 @@
-import { defualtAlert, defualtConfirm } from "../service/modal-service.js";
-
 export function modalController(angularModule){
     angularModule
-    .controller('ModalController', function($scope, $timeout, $interval){
+    .controller('ModalController', function($scope, $timeout, $interval, defualtModalFactory){
         /* 경고창 관련 자바스크립트 */
         $scope.alerted = false;
-        $scope.alertModal = defualtAlert;
+        $scope.alertModal = defualtModalFactory.alert;
 
         $scope.alert = function(alertObj, type, second){
             $scope.alertModal = alertObj;
@@ -40,7 +38,7 @@ export function modalController(angularModule){
 
         /* 확인창 관련 자바스크립트 */
         var $confirmModal = $('#confirmModal');
-        $scope.confirmModal = defualtConfirm;
+        $scope.confirmModal = defualtModalFactory.confirm;
         
         $scope.confirm = function(title, content, callback){
             $confirmModal.modal('show');
@@ -51,5 +49,5 @@ export function modalController(angularModule){
                 callback();
             }
         }
-    })
+    });
 }

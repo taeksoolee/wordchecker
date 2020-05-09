@@ -1,6 +1,13 @@
 import { angularModule } from "./angular-config.js";
 import { setRouting } from "./angular-routing.js";
 import { setDirective } from "./angular-directive.js";
+
+import { setDateService } from "./service/date-service.js";
+import { setModalService } from "./service/modal-service.js";
+import { setMemberService } from "./service/member-service.js";
+import { setWordService } from "./service/word-service.js";
+import { setBoardService } from "./service/board-service.js";
+
 import { modalController } from "./controller/modal-controller.js";
 import { boardController } from "./controller/board-controller.js";
 import { addWordController } from "./controller/word-add-controller.js";
@@ -13,6 +20,13 @@ import { searchMemberController } from "./controller/member-search-controller.js
 
 setRouting(angularModule);
 setDirective(angularModule);
+
+
+setDateService(angularModule);
+setModalService(angularModule);
+setMemberService(angularModule);
+setWordService(angularModule);
+setBoardService(angularModule);
 
 modalController(angularModule);
 boardController(angularModule);

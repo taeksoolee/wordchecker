@@ -1,11 +1,9 @@
-import { defaultWord } from "../service/word-service.js"
-
 export function modifyWordController(angularModule){
     angularModule
-    .controller('ModifyWordController', function($scope){
+    .controller('ModifyWordController', function($scope, defaultWordFactory){
         if(typeof $scope.$blackScreen == "undefined") $scope.$blackScreen = $('#black-screen');
         if(typeof $scope.$modifyWordComponent == "undefined") $scope.$modifyWordComponent = $('#modifyWordComponent');
-        $scope.selectedWord = defaultWord;
+        $scope.selectedWord = defaultWordFactory.word;
         
         $scope.openModifyWord = function(wordNo){
             console.log(wordNo);
@@ -27,9 +25,7 @@ export function modifyWordController(angularModule){
                     content1:'단어 수정을 완료하였습니다.'
                 }, 'primary', 2);
                 $scope.closeModifyWord();
-            });
-            
-            
+            }); 
         }
     })
 }
