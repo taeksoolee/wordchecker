@@ -1,0 +1,10 @@
+<div id="alertList" class="fixed-top" style="top:60px;">
+<div ng-repeat="alert in alertList">
+	<div class="alert text-center mb-1 mouseOver" ng-class="alert.type" ng-click="closeAlert(alert.no)">
+	    {{alert.content1}} 
+	    <a href="{{alert.linkUrl}}" class="alert-link">{{alert.linkComment}}</a> 
+	    {{alert.content2}}
+	    <span class="float-right">x</a></span>
+	</div>
+</div>
+</div>

@@ -14,7 +14,7 @@
                                                 <div class="float-right">
                                                     <a href="#" ng-click="closeModifyWord($event);"><i class="fas fa-times"></i></a>
                                                 </div>
-                                                <div class="text-center mt-3 mb-3">게시판 등록</div>
+                                                <div class="text-center mt-3 mb-3">단어 수정</div>
                                                 <div class="form-row">
                                                     <div class="col-xl-6 mt-1 mb-2">
                                                         <label class="sr-only" for="speling">스펠링</label>
@@ -25,15 +25,16 @@
                                                             <input type="text" class="form-control bg-white" ng-model="selectedWord.speling" placeholder="철자를 입력하세요.">
                                                         </div>
                                                     </div>
-                                                <div class="col-xl-6 my-1 mb-3">
-                                                    <label class="sr-only" for="meaning">해석</label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">해석</div>
-                                                        </div>
-                                                        <input type="text" class="form-control bg-white" ng-model="selectedWord.meaning" placeholder="해석을 입력하세요.">
-                                                    </div>
-                                                </div>
+	                                                <div class="col-xl-6 my-1 mb-3">
+	                                                    <label class="sr-only" for="meaning">해석</label>
+	                                                    <div class="input-group">
+	                                                        <div class="input-group-prepend">
+	                                                            <div class="input-group-text">해석</div>
+	                                                        </div>
+	                                                        <input type="text" class="form-control bg-white" ng-model="selectedWord.meaning" placeholder="해석을 입력하세요.">
+	                                                    </div>
+	                                                </div>
+	                                            </div>
                                                 <div class="w-100 text-center">
                                                     <button type="button" class="btn btn-success w-100" ng-click="modifyWord()">수정</button>
                                                 </div>

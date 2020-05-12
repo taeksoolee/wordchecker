@@ -1,7 +1,7 @@
 export function testWordController(angularModule){
     angularModule
     .controller('TestWordController', function($scope, utils){
-            utils.navCtrlFuncs.closeNav();
+            utils.navControl.closeNav();
             $scope.wordList = defaultWordList;
     });
 }

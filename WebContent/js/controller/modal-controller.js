@@ -1,39 +1,47 @@
 export function modalController(angularModule){
     angularModule
     .controller('ModalController', function($scope, $timeout, $interval, defualtModalFactory){
+    	$scope.alertList = [];
+    	
         /* 경고창 관련 자바스크립트 */
         $scope.alerted = false;
         $scope.alertModal = defualtModalFactory.alert;
-
-        $scope.alert = function(alertObj, type, second){
-            $scope.alertModal = alertObj;
-            $scope.alerted = true;
-            var sec = 5;
-            if(typeof second != "undefined") var sec = second;
-            var classType = "alert-"
+        
+        $scope.alert = function(alertObj, type){
+        	var topNo = 0;
+        	for(let i in $scope.alertList){
+        		topNo = $scope.alertList[i].no>topNo?$scope.alertList[i].no:topNo;
+        	}
+        	alertObj.no = topNo + 1;
+        	
+        	var alertType = 'alert-'
             switch (type) {
                 case 'primary':
                 case 'success':
                 case 'warning':
                 case 'danger':
-                    classType = classType + type;
-                    break;
+                	alertType = alertType + type;
+                	break;
                 default:
-                    classType = classType + 'primary';
+                	alertType = alertType + 'primary';
             }
-            var $alert = undefined;
-            var alertItv = $interval(() => {
-                $alert = $('.alert');
-                if($alert.length != 0){
-                    $alert.addClass(classType)
-                    $interval.cancel(alertItv);
-                }
-            }, 1);
-
-            $timeout(() => {
-                $alert.removeClass(classType);
-                $scope.alerted = false;
-            }, 1000*parseInt(sec), true);
+        	alertObj.type = alertType;
+            $scope.alertList.push(alertObj);
+        }
+        
+        $scope.closeAlert = function(no){
+        	var index = 0;
+        	for(let i in $scope.alertList){
+        		index = $scope.alertList[i].no==no?i:index;
+        	}
+        	
+        	$scope.alertList.splice(index, 1);
+        }
+        
+        $scope.clearAlertList = function(){
+        	for(let i in $scope.alertList){
+        		$scope.alertList.pop();
+        	}
         }
 
         /* 확인창 관련 자바스크립트 */
@@ -49,5 +57,6 @@ export function modalController(angularModule){
                 callback();
             }
         }
+        
     });
 }

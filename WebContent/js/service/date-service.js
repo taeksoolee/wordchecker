@@ -78,21 +78,23 @@ export function setDateService(angularModule){
             var createYearOptionEle = function(year){
                 var op = document.createElement('option')
                 op.value = year;
-                op.innerText = year;
+                op.innerText = year + '년';
                 return op
             }
 
             var createMonthOptionEle = function(month){
                 var op = document.createElement('option')
                 op.value = month;
-                op.innerText = month;
+                month = month<10?'0'+month:month;
+                op.innerText = month + '월';
                 return op;
             }
 
             var createDayOptionEle = function(day){
                 var op = document.createElement('option')
                 op.value = day;
-                op.innerText = day;
+                day = day<10?'0'+day:day;
+                op.innerText = day + '일';
                 return op;
             }
 

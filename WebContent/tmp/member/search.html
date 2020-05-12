@@ -1,0 +1,81 @@
+<div class="media-member-content ml-3 mr-3 border p-4 p-xl-5 w-auto bg-white">
+    <div class="mt-5 mb-5 rounded-sm">
+        <h4 class="text-center"><i class="fas fa-search"></i>&nbsp;&nbsp;이메일 찾기</h4>
+    </div>
+    <form autocomplete="off">
+        <div class="form-group">
+            <label for="nickname">닉네임 *</label>
+            <input type="text" class="form-control" id="nickname" placeholder="별명을 입력해주세요" auto>
+        </div>
+       <div class="form-group">
+            <label for="year">생년월일 *</label>
+	        <div class="form-group form-row">
+	            <div class="col-sm-6 col-6 p-0">
+	                <div class="input-group">
+	                    <select class="custom-select year mr-sm-2 mr-lg-4" style="text-align-last:center;" ng-model="birthday.email.year" placeholder="" aria-describedby="" required>
+	                        <option value="0">년</option>
+	                    </select>
+	                </div>
+	            </div>
+	            <div class="col-sm-3 col-3 p-0">
+	                <div class="input-group">
+	                    <select class="custom-select month" style="text-align-last:center;" ng-model="birthday.email.month" placeholder="" aria-describedby="" required>
+	                        <option value="0">월</option>
+	                    </select>
+	                </div>
+	            </div>
+	            <div class="col-sm-3 col-3 p-0">
+	                <div class="input-group">
+	                    <select class="custom-select day ml-sm-2 ml-lg-4" style="text-align-last:center;" ng-model="birthday.email.day" placeholder="" aria-describedby="" required>
+	                        <option value="0">일</option>
+	                    </select>
+	                </div>
+	            </div>
+	        </div>
+        </div>
+        <div class="w-100">
+            <button type="button" class="btn btn-warning w-100">이메일 검색</button>
+        </div>
+    </form>
+    
+    <hr class="mt-4">
+    
+    <div class="mt-5 mb-5 rounded-sm">
+        <h4 class="text-center"><i class="fas fa-search"></i>&nbsp;&nbsp;비밀번호 찾기</h4>
+    </div>
+    <form autocomplete="off">
+        <div class="form-group">
+            <label for="email1">이메일 *</label>
+            <input type="email" class="form-control" id="email1" aria-describedby="emailHelp" placeholder="이메일을 입력해주세요">
+        </div>
+        <div class="form-group">
+            <label for="year">생년월일 *</label>
+	        <div class="form-group form-row">
+	            <div class="col-sm-6 col-6 p-0">
+	                <div class="input-group">
+	                    <select class="custom-select year mr-sm-2 mr-lg-4" style="text-align-last:center;" ng-model="birthday.password.year" placeholder="" aria-describedby="" required>
+	                        <option value="0">년</option>
+	                    </select>
+	                </div>
+	            </div>
+	            <div class="col-sm-3 col-3 p-0">
+	                <div class="input-group">
+	                    <select class="custom-select month" style="text-align-last:center;" ng-model="birthday.password.month" placeholder="" aria-describedby="" required>
+	                        <option value="0">월</option>
+	                    </select>
+	                </div>
+	            </div>
+	            <div class="col-sm-3 col-3 p-0">
+	                <div class="input-group">
+	                    <select class="custom-select day ml-sm-2 ml-lg-4" style="text-align-last:center;" ng-model="birthday.password.day" placeholder="" aria-describedby="" required>
+	                        <option value="0">일</option>
+	                    </select>
+	                </div>
+	            </div>
+	        </div>
+        </div>
+        <div class="w-100">
+            <button type="button" class="btn btn-warning w-100">비밀번호 발송</button>
+        </div>
+    </form>
+</div>

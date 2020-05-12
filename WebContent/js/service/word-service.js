@@ -2,33 +2,58 @@ export function setWordService(angularModule){
     angularModule
     .factory('defaultWordFactory', function(){
         return {
-            wordList: [
-                {
-                    no: "0",
-                    speling: "apple",
-                    meaning: "사과"
-                },
-                {
-                    no: "1",
-                    speling: "banaban",
-                    meaning: "바나나"
-                },
-                {
-                    no: "2",
-                    speling: "choco",
-                    meaning: "초코"
-                },
-                {
-                    no: "3",
-                    speling: "hi",
-                    meaning: "안녕"
+            getWordList: function(){
+            	return [
+                    {
+                        no: "",
+                        speling: "",
+                        meaning: ""
+                    }
+                ]
+            },
+            getWord: function(){
+            	return {
+                    no: "",
+                    speling: "",
+                    meaning: ""
                 }
-            ],
-            word: {
-                no: "3",
-                speling: "hi",
-                meaning: "안녕"
             }
         } 
+    })
+    .service('addWordService', function($http, $q, server){
+    	this.addWordList = function(word, jwt){
+    		var deferred = $q.defer();
+            $http({
+                method: 'POST',
+                url: server.contextPath + '/auth/word',
+                headers: {'Content-Type': 'application/json; charset=utf-8',
+                			'jwt': jwt},
+                dateType: "text",
+            	data: JSON.stringify(word)
+            })
+            .then(function successCallback(response) {
+                deferred.resolve(response);
+            }, function errorCallback(error) {
+            	deferred.resolve(error);
+            });
+            return deferred.promise;
+    	}
+    })
+    .service('getWordService', function($http, $q, server){
+    	this.getWordList = function(jwt, start, length){
+    		var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: server.contextPath + '/auth/word?start='+start+'&length='+length,
+                headers: {'Content-Type': 'application/json; charset=utf-8',
+                			'jwt': jwt},
+            })
+            .then(function successCallback(response) {
+                deferred.resolve(response);
+            }, function errorCallback(error) {
+            	throw new Error(error);
+            });
+            return deferred.promise;
+    	}
     });
 }

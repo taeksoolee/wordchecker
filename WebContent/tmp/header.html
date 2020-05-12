@@ -9,7 +9,7 @@
             <li class="nav-item">
                 <a class="text-light nav-link" href="#/board">게시판</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" ng-show="isLogin">
                 <a class="text-light nav-link dropdown-toggle" id="navbarWordDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     단어
                 </a>
@@ -25,18 +25,15 @@
                     회원
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarMemberDropdown">
-                    <a class="dropdown-item" href="#/member/join">회원 가입</a>
-                    <a class="dropdown-item" href="#/member/login">로그인</a>
+                    <a class="dropdown-item" href="#/member/join" ng-hide="isLogin">회원 가입</a>
+                    <a class="dropdown-item" href="#/member/login" ng-hide="isLogin">로그인</a>
                     <!--<div class="dropdown-divider"></div>-->
-                    <a class="dropdown-item" href="#/member/search">찾기</a>
+                    <a class="dropdown-item" href="#/member/search" ng-hide="isLogin">찾기</a>
+                    
+                    <a class="dropdown-item" href="" ng-show="isLogin" ng-click="logout();">로그아웃</a>
+                    <a class="dropdown-item" href="#/member/modify" ng-show="isLogin">정보수정</a>
                 </div>
             </li>
         </ul>
-        <!--
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="검색하기" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0 bg-success text-light" type="button">검색하기</button>
-        </form>
-        -->
     </div>
 </nav>

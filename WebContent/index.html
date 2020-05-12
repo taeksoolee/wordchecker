@@ -12,45 +12,39 @@
     <link rel="stylesheet" href="css/wordchecker.css">
     
 </head>
-<body ng-app="wordCheckerApp" style="height: 100%;"></body>
-<div ng-show="isLoading" class="w-100 h-100 fixed-top zi-9999">
-    <div class="text-center" style="line-height: 50em;">
-        <div class="spinner-border text-primary" style="width: 5em; height: 5em;" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-    </div>
+<body ng-app="wordCheckerApp" style="height: 100%;">
+<div ng-controller="RootController">
+	<div ng-show="isLoading" class="w-100 h-100 fixed-top zi-9999">
+	    <div class="text-center" style="line-height: 50em;">
+	        <div class="spinner-border text-primary" style="width: 5em; height: 5em;" role="status">
+	            <span class="sr-only">Loading...</span>
+	          </div>
+	    </div>
+	</div>
+	<div>
+	    <!--헤더 영역-->
+	    <app-header></app-header>
+	    <app-confirm></app-confirm>
+	    <app-alert></app-alert>
+	    <!--/헤더 영역-->
+	
+	    <!-- 컨텐츠 영역 -->
+	    <section class="d-lg-flex justify-content-center mt-5 mb-5 bt-50px zi-2">
+	        <img src="resource/bg.jpg" class="fixed-top opa-75 zi-m1" width="100%" height="100%">
+	        <div class="mt-5 zi-4">
+				<!-- 라우팅 중 처리 -->
+	            <div ng-view></div>
+	        </div>
+	        
+	    </section>
+	    <!-- /컨텐츠 영역 -->
+	
+	    <!--하단 영역-->
+	    <div style="z-index: 2;">
+	        <app-footer></app-footer>
+	    </div>
+	</div>
 </div>
-<div>
-    <!--헤더 영역-->
-    <app-header></app-header>
-    <!--/헤더 영역-->
-
-    <!-- 컨텐츠 영역 -->
-    <section class="d-lg-flex justify-content-center mt-5 mb-5 bt-50px zi-2">
-        <!--
-        <div class="mt-5">
-            <button type="button" class="fixed-top mt-5" ng-click="test()">test</button>
-        </div>
-        -->
-        <img src="resourse/bg.jpg" class="fixed-top opa-75 zi-m1" width="100%" height="100%">
-        <div class="mt-5 zi-4">
-            <div ng-view></div>
-            
-        </div>
-        <app-alert></app-alert>
-        <app-confirm></app-confirm>
-    </section>
-    <!-- /컨텐츠 영역 -->
-
-    <!--하단 영역-->
-    <div style="z-index: 2;">
-        <app-footer></app-footer>
-    </div>
-</div>
-<!-- 라우팅 중 처리 -->
-
-
-
 <!--/하단 영역-->
     <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>

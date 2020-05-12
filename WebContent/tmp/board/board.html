@@ -1,16 +1,16 @@
-<div class="media-board-content border pt-4 pb-5 pl-lg-5 pr-lg-5 ml-lg-5 mr-lg-5 bd-highlight mb-5 bg-white">  
+<div class="media-board-content border pt-4 pb-5 pl-1 pr-1 pl-lg-5 pr-lg-5 ml-2 mr-2 ml-lg-5 mr-lg-5 bd-highlight mb-5 bg-white">  
     <div class="p-lg-auto w-100">
         <div class="mt-5 mb-5 rounded-sm">
             <div class="pt-3">
-                <h4 class="text-center"><i class="far fa-clipboard"></i>&nbsp;&nbsp;자유 게시판</h4>
+                <h4 class="text-center"><i class="far fa-clipboard"></i>&nbsp;&nbsp;게시판</h4>
             </div>
         </div>
         <div class="row w-100">
             <div class="col-6 pl-4 mb-2 ">
-                <button type="button" class="btn btn-success">검색필터</button>
+                <button type="button" class="btn btn-success" ng-click="openFilterBoard();">검색필터</button>
             </div>
             <div class="col-6 p-0 mb-2 text-right">
-                <button type="button" class="btn btn-success">글쓰기</button>
+                <button type="button" class="btn btn-success" ng-click="openAddBoard();">글쓰기</button>
             </div>
         </div>
         <div class="border p-3 m-0 mb-2" ng-repeat="boardMember in boardMemberList">
@@ -23,8 +23,8 @@
                 </div>
                 <div class="col-auto ml-auto">
                     <div class="float-right">
-                        <button type="button" class="btn btn-primary" ng-click="board.no">수정</button>
-                        <button type="button" class="btn btn-primary" ng-click="board.no">비활성</button>
+                        <button type="button" class="btn btn-primary" ng-click="openModifyBoard();">수정</button>
+                        <button type="button" class="btn btn-primary" ng-click="board.no">삭제</button>
                     </div>
                 </div>
             </div>
@@ -43,6 +43,7 @@
 </div>
 
 <!-- 컴포넌트 -->
+<div id="black-screen" class="fixed-top bg-dark w-100 h-100 opa-75 zi-6" style="display:none;"></div>
 <board-add></board-add>
 <board-filter></board-filter>
 <board-modify></board-modify>

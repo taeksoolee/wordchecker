@@ -3,40 +3,50 @@ export function setRouting(angularModule){
     .config(function($routeProvider){
         $routeProvider
         .when('/', {
-            templateUrl: 'main.html',
+            templateUrl: 'tmp/main.html',
             controller: 'MainController'
         })
         .when('/board', {
-            templateUrl: 'tmp.board/board.html',
+            templateUrl: 'tmp/board/board.html',
             controller: 'BoardController'
         })
         .when('/word/add', {
-            templateUrl: 'tmp.word/add.html',
+            templateUrl: 'tmp/word/add.html',
             controller: 'AddWordController'
         })
         .when('/word/list', {
-            templateUrl: 'tmp.word/list.html',
+            templateUrl: 'tmp/word/list.html',
             controller: 'ListWordController'
         })
         .when('/word/list', {
-            templateUrl: 'tmp.word/list.html',
+            templateUrl: 'tmp/word/list.html',
             controller: 'ListWordController'
         })
         .when('/word/test', {
-            templateUrl: 'tmp.word/test.html',
+            templateUrl: 'tmp/word/test.html',
             controller: 'TestWordController'
         })
         .when('/member/join', {
-            templateUrl: 'tmp.member/join.html',
+            templateUrl: 'tmp/member/join.html',
             controller: 'JoinMemberController'
         })
         .when('/member/login', {
-            templateUrl: 'tmp.member/login.html',
+            templateUrl: 'tmp/member/login.html',
             controller: 'LoginMemberController'
         })
         .when('/member/search', {
-            templateUrl: 'tmp.member/search.html',
+            templateUrl: 'tmp/member/search.html',
             controller: 'SearchMemberController'
+        })
+        .when('/member/modify', {
+            templateUrl: 'tmp/member/modify.html',
+            controller: 'ModifyMemberController'
+        })
+        .when('/error', {
+            templateUrl: 'tmp/error.html',
+        })
+        .otherwise({
+        	redirectTo: '/error'
         })
     })
     .run(function($rootScope){

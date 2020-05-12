@@ -54,6 +54,7 @@ a{
     color: black;
 }
 
+
 .list:hover{
     background-color: lightgray;
     cursor: pointer;
@@ -118,4 +119,13 @@ a{
 
 .zi-99999{
     z-index: 99999 !important;
+}
+
+.mouseOver{
+	cursor: pointer;
+	color: black;
+}
+
+.h-200px{
+	height: 200px !important;
 }
