@@ -126,6 +126,9 @@ a{
 	color: black;
 }
 
+.hover-primary:hover{
+	color: #007bff!important;
+}
 .h-200px{
 	height: 200px !important;
 }

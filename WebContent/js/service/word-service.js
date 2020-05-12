@@ -39,6 +39,25 @@ export function setWordService(angularModule){
             return deferred.promise;
     	}
     })
+    .service('modifyWordService', function($http, $q, server){
+    	this.modifyWordState = function(word, jwt){
+    		var deferred = $q.defer();
+            $http({
+                method: 'PATCH',
+                url: server.contextPath + '/auth/word/state',
+                headers: {'Content-Type': 'application/json; charset=utf-8',
+                			'jwt': jwt},
+                dateType: "text",
+            	data: JSON.stringify(word)
+            })
+            .then(function successCallback(response) {
+                deferred.resolve(response);
+            }, function errorCallback(error) {
+            	throw new Error();
+            });
+            return deferred.promise;
+    	}
+    })
     .service('getWordService', function($http, $q, server){
     	this.getWordList = function(jwt, start, length){
     		var deferred = $q.defer();

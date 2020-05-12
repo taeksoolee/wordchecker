@@ -26,6 +26,12 @@ export function setDirective(angularModule){
             controller: 'ModalController'
         };
     })
+    .directive('appExplain', function () {  
+        return {
+            restrict: 'E',
+            templateUrl: 'tmp/modal/explain.html',
+        };
+    })
     .directive('wordModify', function () {  
         return {
             restrict: 'E',

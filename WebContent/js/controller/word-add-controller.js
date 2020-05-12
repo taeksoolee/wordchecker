@@ -41,9 +41,7 @@ export function addWordController(angularModule){
         	.then(function(success){
         		$scope.wordList = defaultWordFactory.getWordList();
         		$scope.wordCnt = 1;
-        		$rootScope.runAlertInterval(function(){
-        			$scope.alert({content1: success.data.result+'개의 단어 입력 완료하였습니다.'}, 'success');
-        		})
+       			$scope.alert({content1: success.data.result+'개의 단어 입력 완료하였습니다.'}, 'success');
 	    	})
 	    	.catch(function(error){
 	    		$scope.alert({content1:'error.message'}, 'danger');

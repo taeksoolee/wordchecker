@@ -1,6 +1,6 @@
 export function listWordController(angularModule){
     angularModule
-    .controller('ListWordController', function($rootScope, $scope, utils, defaultWordFactory, getWordService){
+    .controller('ListWordController', function($rootScope, $scope, utils, defaultWordFactory, getWordService, modifyWordService){
     	$rootScope.afterLoginUrl = '/word/list';
     	
     	if(!$rootScope.isLogin){
@@ -10,37 +10,84 @@ export function listWordController(angularModule){
     	
         utils.navControl.closeNav();
         
+        var getDefaultStart = function(){
+        	return 0;
+        }
+        var getDefaultLength = function(){
+        	return 10;
+        }
+        $scope.setWordListDefaultConfig = function(){
+        	$scope.wordListStart = getDefaultStart();
+        	$scope.wordListLength = getDefaultLength();
+        }
+        
         $scope.wordList = [];
-        var wordListStart = 0;
-        var wordListLength = 10;
+        $scope.setWordListDefaultConfig();
+        
+        $scope.checkWordBookmark = function(no){
+        	if(no == undefined){
+        		console.log(no);
+        		$rootScope.wordBookmark = -1;
+        	}else{
+        		console.log(no);
+        		$rootScope.wordBookmark = no;
+        	}
+        }
         
         $scope.setWordList = function(jwt, start, length){
-        	getWordService.getWordList(jwt, start, length)
+        	getWordService.getWordList(utils.cookieControl.getJwtCookie(), $scope.wordListStart, $scope.wordListLength)
         	.then(function(success){
-        		if(success.data.length != 0){
 	        		var wordList = success.data;
 	        		for(let i in wordList){
 	        			$scope.wordList.push(wordList[i]);
 	        		}
-	        		wordListStart = wordListStart + wordListLength;
-        		}else{
-        			$scope.alert({content1:'마지막 줄 입니다.'}, 'warning');
-        		}
+	        		$scope.wordListStart = $scope.wordListStart + $scope.wordListLength;
 	    	})
 	    	.catch(function(error){
 	    		$scope.alert({content1:'error.message'}, 'danger');
 	    	})
         }
-        $scope.setWordList(utils.cookieControl.getJwtCookie(), wordListStart, wordListLength);
         
-        window.onscroll = function(){
-        	if((document.body.offsetHeight + 96) == (window.innerHeight + window.scrollY)){
-        		try{
-        			$scope.setWordList(utils.cookieControl.getJwtCookie(), wordListStart, wordListLength);
-        		}catch (e) {
-        			$scope.alert({content1: e.message}, '');
-				}
+        $scope.setWordList();
+        
+        $scope.deleteWord = function(no){
+        	event.preventDefault();
+        	var word = {
+        		'no': no,
+        		'state': 0
         	}
+        	modifyWordService.modifyWordState(word, utils.cookieControl.getJwtCookie())
+        	.then(function(success){
+        		$scope.alert({content1: '삭제가 완료되었습니다.'}, 'success');
+        		
+        		for(let i in $scope.wordList){
+        			if($scope.wordList[i].no == no){
+        				$scope.wordList.splice(i, 1);
+        			}
+        		}
+        		
+        		$scope.setWordList(utils.cookieControl.getJwtCookie(), $scope.wordListStart, 1);
+        	}).catch(function(error){
+        		$scope.alert({content1: '로그인 정보가 없습니다.'}, 'danger');
+        	})
+        	
         }
+        
+        $(window).scroll(function(){
+        	var scrolltop = $(window).scrollTop();
+			if( scrolltop == $(document).height() - $(window).height() ){
+				getWordService.getWordList(utils.cookieControl.getJwtCookie(), $scope.wordListStart, $scope.wordListLength)
+	        	.then(function(success){
+	        		var wordList = success.data;
+	        		for(let i in wordList){
+	        			$scope.wordList.push(wordList[i]);
+	        		}
+	        		$scope.wordListStart = $scope.wordListStart + $scope.wordListLength;
+		    	})
+		    	.catch(function(error){
+		    		$scope.alert({content1:'error.message'}, 'danger');
+		    	})
+			}
+		});
     })
 }

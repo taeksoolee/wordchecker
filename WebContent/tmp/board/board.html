@@ -10,21 +10,24 @@
                 <button type="button" class="btn btn-success" ng-click="openFilterBoard();">검색필터</button>
             </div>
             <div class="col-6 p-0 mb-2 text-right">
-                <button type="button" class="btn btn-success" ng-click="openAddBoard();">글쓰기</button>
+                <button type="button" class="btn btn-success" ng-show="isLogin" ng-click="openAddBoard();">글쓰기</button>
             </div>
         </div>
         <div class="border p-3 m-0 mb-2" ng-repeat="boardMember in boardMemberList">
             <div class="row">
                 <div class="col-auto mt-3 pr-0">
-                    <input type="checkbox"/>
+		    		<!-- 체크 되지 않았을 경우 -->
+		    		<span class="mouseOver hover-primary" ng-hide="$index == boardBookmark" ng-click="checkBoardBookmark($index)"><i class="far fa-bookmark"></i></span>
+		    		<!-- 체크 되었을 경우 -->
+					<span class="mouseOver text-primary" ng-show="$index == boardBookmark" ng-click="checkBoardBookmark()"><i class="fas fa-bookmark"></i></span>
                 </div>
                 <div class="col-auto mt-3">
                     <span class="small">[{{boardMember.member.nickname}}]&nbsp;{{boardMember.board.writeDate}}</span>
                 </div>
                 <div class="col-auto ml-auto">
                     <div class="float-right">
-                        <button type="button" class="btn btn-primary" ng-click="openModifyBoard();">수정</button>
-                        <button type="button" class="btn btn-primary" ng-click="board.no">삭제</button>
+                        <span class="mouseOver hover-primary pl-3" ng-click="openModifyBoard();" ng-show="boardMember.board.memberNo == loginMemberNo"><i class="fas fa-edit"></i></span>
+                        <span class="mouseOver hover-primary pl-3" ng-click="removeBoard(boardMember.board.no)" ng-show="boardMember.board.memberNo == loginMemberNo"><i class="fas fa-times"></i></span>
                     </div>
                 </div>
             </div>

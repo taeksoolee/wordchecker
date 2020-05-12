@@ -30,10 +30,12 @@ export function rootController(angularModule){
     		$scope.confirm('확인 메시지', '로그아웃 하시겠습니까?', function(){
     			$rootScope.isLogin = false;
     			utils.cookieControl.deleteJwtCookie();
-    			utils.goRouting('/');
-    			$scope.alert({content1:'로그아웃이 완료 되었습니다'}, 'primary');
+    			location.reload();
     		})
     	}
+    	
+    	$rootScope.wordBookmark = -1;
+    	$rootScope.boardBookmark = -1;
     	
     	
 	})

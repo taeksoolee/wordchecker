@@ -13,8 +13,8 @@ export function loginMemberController(angularModule){
         
         
         $scope.checkAutoLogin = function(){
-        	console.log('aaa');
-        	$scope.alert({content1:'공용 환경에서 사용은 권장하지 않습니다.'}, 'warning');
+        	if($autoLogin.prop('checked') == true)
+        		$scope.alert({content1:'공용 환경에서 사용은 권장하지 않습니다.'}, 'warning');
         }
         
         $scope.login = function(){
@@ -62,6 +62,5 @@ export function loginMemberController(angularModule){
         		$rootScope.isLoading = false;
         	}
         }
-        
     })
 }
