@@ -2,14 +2,14 @@
     <div class="mt-5 mb-5 rounded-sm">
         <h4 class="text-center"><i class="fas fa-search"></i>&nbsp;&nbsp;회원정보 수정</h4>
     </div>
-    <form autocomplete="off">
+    <form id="modifyForm" autocomplete="off">
         <div class="form-group">
             <label for="email">이메일 *</label>
-            <input type="text" class="form-control text-center" id="email" ng-model="modifyForm.email" aria-describedby="emailHelp" placeholder="이메일을 입력해주세요">
+            <input type="text" class="form-control text-center" id="email" ng-model="modifyMemberForm.email" aria-describedby="emailHelp" placeholder="이메일을 입력해주세요" disabled>
         </div>
         <div class="form-group">
             <label for="password">비밀번호  <sub class="text-secondary opa-75">8자리 이상, 문자 및 숫자 포함</sub></label>
-            <input type="password" class="form-control text-center" id="password" ng-model="modifyForm.password" placeholder="비밀번호를 입력해주세요">
+            <input type="password" class="form-control text-center" id="password" ng-model="modifyMemberForm.password" placeholder="비밀번호를 입력해주세요">
         </div>
         <div class="form-group">
             <label for="re-password">비밀번호 확인</label>
@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
             <label for="nickname">별명 * <sub class="text-secondary opa-75">10자리 이하, 한글 및 영문</sub></label>
-            <input type="text" class="form-control text-center" id="nickname" ng-model="modifyForm.nickname" placeholder="별명을 입력해주세요">
+            <input type="text" class="form-control text-center" id="nickname" ng-model="modifyMemberForm.nickname" placeholder="별명을 입력해주세요">
         </div>
         <div class="form-group">
             <label for="year">생년월일 *</label>
@@ -49,7 +49,7 @@
             <small id="message" class="form-text text-danger text-center">입력값이 잘못되었습니다.</small>
         </div>
         <div class="mt-5 w-100">
-            <button type="button" class="btn btn-primary w-100" ng-click="join();">정보변경</button>
+            <button type="button" class="btn btn-primary w-100" ng-click="modifyMember();">정보변경</button>
         </div>
     </form>
 </div>

@@ -50,6 +50,7 @@ export function setDirective(angularModule){
         return {
             restrict: 'E',
             templateUrl: 'tmp/board/filter.html',
+            controller: 'BoardFilterController'
         };
     })
     .directive('boardModify', function () {  

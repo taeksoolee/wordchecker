@@ -45,7 +45,18 @@
 	        <app-footer></app-footer>
 	    </div>
 	</div>
+	<div id="toBookmark" class="zi-4" ng-if="wordBookmark!=-1 || boardBookmark!=-1" ng-click="moveToBookmark();">
+	    <div>
+	    	<i class="far fa-bookmark"></i>
+	    </div>
+	</div>
+	<div id="toTop" class="zi-4" ng-click="moveToTop();">
+	    <div>
+	    	<i class="fas fa-chevron-up"></i>
+	    </div>
+	</div>
 </div>
+
 <!--/하단 영역-->
     <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -55,6 +66,7 @@
     <script src="vendor/angular-1.2.32/angular-route.min.js"></script>
     <script src="vendor/angular-1.2.32/angular-animate.min.js"></script>
     <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="module" src="./js/angular-app.js"></script>
 </body>

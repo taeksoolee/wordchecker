@@ -125,5 +125,26 @@ export function setMemberService(angularModule){
             
             return deferred.promise;
     	}
+    })
+    .service('modifyMemberService', function($http, $q, server){
+    	this.modifyMember = function(jwt, modifyMember){
+    		var deferred = $q.defer();
+        	
+            $http({
+                method: 'PATCH',
+                url: server.contextPath + '/auth/member',
+                headers: {'Content-Type': 'application/json; charset=utf-8',
+                		'jwt': jwt},
+	    		dateType: "text",
+	        	data: JSON.stringify(modifyMember)
+            })
+            .then(function successCallback(response) {
+                deferred.resolve(response);
+            }, function errorCallback(error) {
+            	deferred.resolve(error);
+            });
+            
+            return deferred.promise;
+    	}
     });
 }

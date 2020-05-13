@@ -32,20 +32,37 @@ export function addWordController(angularModule){
         }
         
         $scope.addWordList = function(){
-        	$scope.processBool = true;
         	for(let i in $scope.wordList){
-        		console.log($scope.wordList[i]);
+        		if($scope.wordList[i].speling==""){
+        			$scope.alert({content1:'모든 단어를 입력해주세요'}, 'warning');
+        			return;
+        		}
+        		if($scope.wordList[i].meaning==""){
+        			$scope.alert({content1:'모든 단어를 입력해주세요'}, 'warning');
+        			return;
+        		}
+        		if(!utils.validation.word.speling($scope.wordList[i].speling)){
+        			$scope.alert({content1:'스펠링은 영문자를 입력해주세요'}, 'warning');
+        			return;
+        		}
+        		if(!utils.validation.word.meaning($scope.wordList[i].meaning)){
+        			$scope.alert({content1:'해석은 한글을 입력해주세요'}, 'warning');
+        			return;
+        		}
         	}
         	
-        	addWordService.addWordList($scope.wordList, utils.cookieControl.getJwtCookie())
-        	.then(function(success){
-        		$scope.wordList = defaultWordFactory.getWordList();
-        		$scope.wordCnt = 1;
-       			$scope.alert({content1: success.data.result+'개의 단어 입력 완료하였습니다.'}, 'success');
-	    	})
-	    	.catch(function(error){
-	    		$scope.alert({content1:'error.message'}, 'danger');
-	    	})
+        	
+        	$scope.confirm('확인 메시지', '단어를 등록 하시겠습니까?', function(){
+	        	addWordService.addWordList($scope.wordList, utils.cookieControl.getJwtCookie())
+	        	.then(function(success){
+	        		$scope.wordList = defaultWordFactory.getWordList();
+	        		$scope.wordCnt = 1;
+	       			$scope.alert({content1: success.data.result+'개의 단어 입력 완료하였습니다.'}, 'success');
+		    	})
+		    	.catch(function(error){
+		    		$scope.alert({content1:'error.message'}, 'danger');
+		    	})
+        	})
         }
     });
 }

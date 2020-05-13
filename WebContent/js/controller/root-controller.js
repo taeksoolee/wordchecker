@@ -37,6 +37,31 @@ export function rootController(angularModule){
     	$rootScope.wordBookmark = -1;
     	$rootScope.boardBookmark = -1;
     	
+    	$rootScope.onBlackScreen = false;
+    	
+    	window.addEventListener('scroll', function(e) {
+    		$('#toTop').fadeIn();	  
+    		if(window.scrollY == 0){
+    			$('#toTop').fadeOut();
+    		}
+    		
+    		$('#toBookmark').fadeIn();	  
+    	});
+    	
+    	$scope.moveToTop = function(){
+    		$('html, body').animate({scrollTop : 0}, 400);
+    	}
+    	
+    	$scope.moveToBookmark = function(){
+    		var top = 0
+    		if($rootScope.wordBookmark != -1){
+    			top = $('#'+$rootScope.wordBookmark).offset().top-100;
+    		}else if($rootScope.boardBookmark != -1){
+    			top = $('#'+$rootScope.boardBookmark).offset().top-100;
+    		}
+    		$('html, body').animate({scrollTop : top}, 400);
+    		
+    	}
     	
 	})
 }

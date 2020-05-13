@@ -13,29 +13,47 @@
                                                 <div class="float-right">
                                                     <a href="#" ng-click="closeFilterBoard($event);"><i class="fas fa-times"></i></a>
                                                 </div>
-                                                <div class="text-center mt-3 mb-3">게시판 검색</div>
+                                                <div class="text-center mt-3 mb-3">게시판 필터</div>
                                                 <div class="form-row">
-                                                    <div class="col-xl-6 mt-1 mb-2">
-                                                        <label class="sr-only" for="speling">스펠링</label>
+                                                    <div class="col-xl-12 mt-1 mb-3">
+                                                        <label class="sr-only" for="speling">제&nbsp;&nbsp;&nbsp;&nbsp;목</label>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <div class="input-group-text">스펠링</div>
+                                                                <div class="input-group-text">제&nbsp;&nbsp;&nbsp;&nbsp;목</div>
                                                             </div>
-                                                            <input type="text" class="form-control bg-white" ng-model="selectedWord.speling" placeholder="철자를 입력하세요.">
+                                                            <input type="text" class="form-control bg-white" ng-model="boardMemberFilter.title">
                                                         </div>
                                                     </div>
-	                                                <div class="col-xl-6 my-1 mb-3">
-	                                                    <label class="sr-only" for="meaning">해석</label>
+	                                                <div class="col-xl-12 my-1 mb-3">
+	                                                    <label class="sr-only" for="meaning">내&nbsp;&nbsp;&nbsp;&nbsp;용</label>
 	                                                    <div class="input-group">
 	                                                        <div class="input-group-prepend">
-	                                                            <div class="input-group-text">해석</div>
+	                                                            <div class="input-group-text">내&nbsp;&nbsp;&nbsp;&nbsp;용</div>
 	                                                        </div>
-	                                                        <input type="text" class="form-control bg-white" ng-model="selectedWord.meaning" placeholder="해석을 입력하세요.">
+	                                                        <input type="text" class="form-control bg-white" ng-model="boardMemberFilter.content">
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-xl-12 my-1 mb-3">
+	                                                    <label class="sr-only" for="meaning">작성자</label>
+	                                                    <div class="input-group">
+	                                                        <div class="input-group-prepend">
+	                                                            <div class="input-group-text">작성자</div>
+	                                                        </div>
+	                                                        <input type="text" class="form-control bg-white" ng-model="boardMemberFilter.nickname">
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-xl-12 my-1 mb-3">
+	                                                    <label class="sr-only" for="meaning">작성일</label>
+	                                                    <div class="input-group">
+	                                                        <div class="input-group-prepend">
+	                                                            <div class="input-group-text">작성일</div>
+	                                                        </div>
+	                                                        <input type="text" class="drp form-control bg-white" ng-model="boardMemberFilter.writeDate" readonly>
 	                                                    </div>
 	                                                </div>
 	                                            </div>
-                                                <div class="w-100 text-center">
-                                                    <button type="button" class="btn btn-success w-100" ng-click="filterBoard()">수정</button>
+                                                <div class="w-100 text-center mt-2">
+                                                    <button type="button" class="btn btn-success w-100" ng-click="filterBoard()">필터 적용</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -49,4 +67,3 @@
         </div>
     </div>
 </div>
-

@@ -2,25 +2,104 @@
     <div class="mt-5 mb-5 rounded-sm">
         <h4 class="text-center"><i class="fas fa-edit"></i>&nbsp;&nbsp;단어 평가</h4>
     </div>
-
-    <div class="list form-row align-items-center mt-3 mb-3 p-3 border" ng-repeat="word in wordList" ng-click="openModifyWord(word.no);">
-        <div class="col-sm-6 col-auto mt-1">
-            <label class="sr-only" for="speling">스펠링</label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">스펠링</div>
-                </div>
-                <input type="text" class="form-control bg-white" ng-model="word.speling" placeholder="철자를 입력하세요." readonly>
-            </div>
-        </div>
-        <div class="col-sm-6 col-auto mt-1">
-            <label class="sr-only" for="meaning">해석</label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">해석</div>
-                </div>
-                <input type="text" class="form-control bg-white" ng-model="word.meaning" placeholder="해석을 입력하세요." readonly>
-            </div>
-        </div>
+	
+	<div ng-hide="!onTest">
+		<div class="row align-items-center">
+        	<div class="input-group mb-2 col-12 col-sm-6 mb-3 mt-3">
+            	<div class="input-group-prepend">
+                	<span class="input-group-text">시간</span>
+            	</div>
+	            <input type="number" class="form-control" aria-label="wordCount" ng-model="wordTestFilter.time"/>
+	            <div class="input-group-append">
+	                <span class="input-group-text">분</span>
+	            </div>
+	        </div>
+	        <div class="input-group mb-2 col-12 col-sm-6 mb-3 mt-3">
+            	<div class="input-group-prepend">
+                	<span class="input-group-text">단어수</span>
+            	</div>
+	            <input type="number" class="form-control" aria-label="wordCount" ng-model="wordTestFilter.cnt" min="1" max="100"/>
+	            <div class="input-group-append">
+	                <span class="input-group-text">개</span>
+	            </div>
+	        </div>
+	        <div class="input-group mb-2 col-12 col-sm-6 mb-3 mt-3">
+            	<div class="input-group-prepend">
+                	<span class="input-group-text">스펠링</span>
+            	</div>
+	            <input type="text" class="form-control" aria-label="wordCount" ng-model="wordTestFilter.speling"/>
+	        </div>
+	        <div class="input-group mb-2 col-12 col-sm-6 mb-3 mt-3">
+            	<div class="input-group-prepend">
+                	<span class="input-group-text">해석</span>
+            	</div>
+	            <input type="text" class="form-control" aria-label="wordCount" ng-model="wordTestFilter.meaning"/>
+	        </div>
+	        <div class="input-group mb-2 col-12 col-sm-6 mb-3 mt-3">
+            	<div class="input-group-prepend">
+                	<span class="input-group-text">등록일</span>
+            	</div>
+	            <input type="text" class="form-control" aria-label="wordCount" ng-model="wordTestFilter.writeDate"/>
+	        </div>
+	        <div class="input-group mb-2 col-12 col-sm-6 mb-3 mt-3">
+	        	<div class="row w-100 pr-0">
+	        	<div class="col-7 col-sm-6">
+	            	<div class="custom-control custom-radio text-center pl-4 pl-sm-5 ml-sm-3">
+					  <input type="radio" id="isSpeling" name="customRadio" class="custom-control-input" ng-model="wordTestFilter.isSpeling" checked>
+					  <label class="custom-control-label" for="isSpeling">스펠링</label>
+					</div>
+				</div>
+				<div class="col-5 col-sm-6">
+					<div class="custom-control custom-radio text-center pl-4 pr-0 pl-sm-5 ml-sm-3">
+					  <input type="radio" id="isMeaning" name="customRadio" class="custom-control-input" ng-model="wordTestFilter.isMeaning" >
+					  <label class="custom-control-label" for="isMeaning">해석</label>
+					</div>
+				</div>
+				</div>
+	        </div>
+	        <div class="input-group mb-2 col-12 mb-3 mt-3">
+            	<div class="input-group-prepend">
+                	<span class="input-group-text">순서</span>
+            	</div>
+	            <select class="custom-select">
+	            	<option>등록일 오름차순</option>
+	            	<option>등록일 내림차순</option>
+	            	<option>스펠링 오름차순</option>
+	            	<option>스펠링 내림차순</option>
+	            	<option>해석 오름차순</option>
+	            	<option>해석 오름차순</option>
+	            </select>
+	        </div>
+	        <div class="w-100 text-center mt-2">
+	            <button type="button" class="btn btn-success w-100" ng-click="">시험 시작!</button>
+	        </div>
+	    </div>
+    </div>
+	
+	<div ng-show="!onTest">
+	<!-- timer -->
+		<div id="testTimer">
+			<span></span>
+		</div>
+	   <div class="list form-row align-items-center mt-3 mb-3 p-3 border" ng-repeat="word in wordTestList" ng-click="openModifyWord(word.no);">
+	       <div class="col-sm-6 col-auto mt-1">
+	           <label class="sr-only" for="speling">스펠링</label>
+	           <div class="input-group">
+	               <div class="input-group-prepend">
+	                   <div class="input-group-text">스펠링</div>
+	               </div>
+	               <input type="text" class="form-control bg-white" ng-model="word.speling" placeholder="철자를 입력하세요." readonly>
+	           </div>
+	       </div>
+	       <div class="col-sm-6 col-auto mt-1">
+	           <label class="sr-only" for="meaning">해석</label>
+	           <div class="input-group">
+	               <div class="input-group-prepend">
+	                   <div class="input-group-text">해석</div>
+	               </div>
+	               <input type="text" class="form-control bg-white" ng-model="word.meaning" placeholder="해석을 입력하세요." readonly>
+	           </div>
+	       </div>
+	   </div>
     </div>
 </div>

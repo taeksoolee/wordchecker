@@ -51,6 +51,8 @@ export function setRouting(angularModule){
     })
     .run(function($rootScope){
         $rootScope.$on('$routeChangeStart', function(e, curr, prev){
+        	$rootScope.wordBookmark = -1;
+        	$rootScope.boardBookmark = -1;
             $rootScope.isLoading = true;
         });
         $rootScope.$on('$routeChangeSuccess', function(e, curr, prev){

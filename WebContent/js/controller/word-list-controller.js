@@ -52,25 +52,26 @@ export function listWordController(angularModule){
         
         $scope.deleteWord = function(no){
         	event.preventDefault();
-        	var word = {
-        		'no': no,
-        		'state': 0
-        	}
-        	modifyWordService.modifyWordState(word, utils.cookieControl.getJwtCookie())
-        	.then(function(success){
-        		$scope.alert({content1: '삭제가 완료되었습니다.'}, 'success');
-        		
-        		for(let i in $scope.wordList){
-        			if($scope.wordList[i].no == no){
-        				$scope.wordList.splice(i, 1);
-        			}
-        		}
-        		
-        		$scope.setWordList(utils.cookieControl.getJwtCookie(), $scope.wordListStart, 1);
-        	}).catch(function(error){
-        		$scope.alert({content1: '로그인 정보가 없습니다.'}, 'danger');
+        	$scope.confirm('확인 메시지', '선택하신 단어를 삭제 하시겠습니까?', function(){
+	        	var word = {
+	        		'no': no,
+	        		'state': 0
+	        	}
+	        	modifyWordService.modifyWordState(utils.cookieControl.getJwtCookie(), word)
+	        	.then(function(success){
+	        		$scope.alert({content1: '삭제가 완료되었습니다.'}, 'success');
+	        		
+	        		for(let i in $scope.wordList){
+	        			if($scope.wordList[i].no == no){
+	        				$scope.wordList.splice(i, 1);
+	        			}
+	        		}
+	        		
+	        		$scope.setWordList(utils.cookieControl.getJwtCookie(), $scope.wordListStart, 1);
+	        	}).catch(function(error){
+	        		$scope.alert({content1: '로그인 정보가 없습니다.'}, 'danger');
+	        	})
         	})
-        	
         }
         
         $(window).scroll(function(){

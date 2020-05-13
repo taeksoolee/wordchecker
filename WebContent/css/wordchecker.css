@@ -132,3 +132,45 @@ a{
 .h-200px{
 	height: 200px !important;
 }
+
+#toTop{
+	position: fixed;
+    top: 90%;
+    left: 85%;
+    border-radius: 30px;
+    width: 45px;
+    background-color: #525252;
+    display:none;
+}
+#toTop:hover{
+	cursor: pointer;
+	background-color: #007bff!important;
+}
+#toTop div{
+	text-align: center;
+    height: 45px;
+    font-size: 20px;
+    line-height: 39px;
+    color: white;
+}
+
+#toBookmark{
+	position: fixed;
+    top: 81.5%;
+    left: 85%;
+    border-radius: 30px;
+    width: 45px;
+    background-color: #525252;
+    display:none;
+}
+#toBookmark:hover{
+	cursor: pointer;
+	background-color: #007bff!important;
+}
+#toBookmark div{
+	text-align: center;
+    height: 45px;
+    font-size: 20px;
+    line-height: 39px;
+    color: white;
+}
