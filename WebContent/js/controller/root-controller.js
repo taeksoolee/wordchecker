@@ -6,15 +6,29 @@ export function rootController(angularModule){
     	$rootScope.isLogin = false;
     	$rootScope.autoLogin = false;
     	$rootScope.loginMemberNo = 0;
+    	$rootScope.tokenExpirationPeriod = undefined;
+    	$rootScope.loginExpInterval = undefined;
     	
-    	var cookieJwt = utils.cookieControl.getJwtCookie();
-    	loginMemberService.checkLogin(cookieJwt)
+    	$rootScope.setTokenExpirationPeriod = function(time){
+    		$rootScope.tokenExpirationPeriod = time - (new Date().getTime());
+    		
+    		$rootScope.loginExpInterval = $interval(function(){
+    			$rootScope.tokenExpirationPeriod = $rootScope.tokenExpirationPeriod - 100;
+				if($scope.tokenExpirationPeriod < 0){
+					$interval.cancel($rootScope.loginExpInterval);
+				}
+			}, 100)
+    	}
+    	
+    	loginMemberService.checkLogin(utils.cookieControl.getJwtCookie())
     	.then(function(success){
     		if(success.data.memberNo != undefined){
     			$rootScope.isLogin = true;
     			$rootScope.loginMemberNo = success.data.memberNo;
+    			
+    			$rootScope.setTokenExpirationPeriod(success.data.time);
     		}
-    	}).catch(function(error){});
+    	}).catch(function(error){console.log(error)});
     	
     	$rootScope.runAlertInterval = function(callback){
 	    	var checkAlertListInterval = $interval(function(){
@@ -32,6 +46,21 @@ export function rootController(angularModule){
     			utils.cookieControl.deleteJwtCookie();
     			location.reload();
     		})
+    	}
+    	
+    	$rootScope.refreshLogin = function(minute){
+    		$rootScope.isLoading = true;
+    		loginMemberService.getRefreshJwt(utils.cookieControl.getJwtCookie(), minute)
+        	.then(function(success){
+    			console.log(success);
+    			$interval.cancel($rootScope.loginExpInterval);
+    			utils.cookieControl.setJwtCookie(success.data.jwt, new Date(success.data.time).getMinutes());
+    			$rootScope.isLogin = true;
+    			$rootScope.loginMemberNo = success.data.memberNo;
+    			$rootScope.setTokenExpirationPeriod(success.data.time);
+        	}).catch(function(error){console.log(error)}).finally(function() {
+        		$rootScope.isLoading = false;
+        	});
     	}
     	
     	$rootScope.wordBookmark = -1;

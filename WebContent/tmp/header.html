@@ -11,7 +11,7 @@
             </li>
             <li class="nav-item dropdown" ng-show="isLogin">
                 <a class="text-light nav-link dropdown-toggle" id="navbarWordDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    단어
+					단어
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarWordDropdown">
                     <a class="dropdown-item" href="#/word/add">단어 등록</a>
@@ -22,18 +22,22 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="text-light nav-link dropdown-toggle" id="navbarMemberDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    회원
+                	회원
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarMemberDropdown">
                     <a class="dropdown-item" href="#/member/join" ng-hide="isLogin">회원 가입</a>
                     <a class="dropdown-item" href="#/member/login" ng-hide="isLogin">로그인</a>
-                    <!--<div class="dropdown-divider"></div>-->
                     <a class="dropdown-item" href="#/member/search" ng-hide="isLogin">찾기</a>
-                    
                     <a class="dropdown-item" href="" ng-show="isLogin" ng-click="logout();">로그아웃</a>
                     <a class="dropdown-item" href="#/member/modify" ng-show="isLogin">정보수정</a>
                 </div>
             </li>
         </ul>
+	    <form class="form-inline my-2 my-lg-0">
+	    	<div class="mr-3 text-white" ng-if="tokenExpirationPeriod!=undefined">
+	    		<span>{{tokenExpirationPeriod | timeFormatToTimestamp}} &nbsp;</span> 
+	    		<span><a href="#/" class="text-primary" ng-click="refreshLogin(30);">로그인 30분 연장</a></span>
+	    	</div>
+	    </form>
     </div>
 </nav>

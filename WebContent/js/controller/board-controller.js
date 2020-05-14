@@ -29,6 +29,8 @@ export function boardController(angularModule){
         
         $scope.setBoardMemberList = function(){
         	$scope.setBoardWriteDate();
+        	
+        	$rootScope.isLoading = true;
         	boardListService.getBoardMemberList($scope.boardListStart, $scope.boardListLength, $scope.boardMemberFilter)
         	.then(function(success){
         		for(let i in success.data){
@@ -36,7 +38,10 @@ export function boardController(angularModule){
         		}
         		$scope.boardListStart = $scope.boardListStart +  $scope.boardListLength;
             })
-            .catch(function(error){console.log(error);});
+            .catch(function(error){console.log(error);})
+        	.finally(function() {
+        		$rootScope.isLoading = false;
+        	})
         }
         
         $scope.setBoardMemberList();
@@ -73,6 +78,7 @@ export function boardController(angularModule){
         	
         	$scope.setBoardWriteDate();
         	$scope.confirm('확인 메시지', '게시글을 등록하시겠습니까?', function(){
+        		$rootScope.isLoading = true;
 	        	addBoardService.addBoard(utils.cookieControl.getJwtCookie(), $scope.addBoardForm)
 	        	.then(function(success){
 	        		if(success.message == undefined){
@@ -93,7 +99,10 @@ export function boardController(angularModule){
 	            })
 	            .catch(function(error){
 	            	console.log(error);
-	            });
+	            })
+	        	.finally(function() {
+	        		$rootScope.isLoading = false;
+	        	});
         	});
         }
         
@@ -103,6 +112,8 @@ export function boardController(angularModule){
 	    			"no": no,
 	    			"state": 0
 	        	} 
+	        	
+	        	$rootScope.isLoading = true;
 	        	removeBoardService.removeBoard(utils.cookieControl.getJwtCookie(), removeBoard).
 	        	then(function(success){
 	        		$scope.alert({content1:'선택하신 게시물 삭제되었습니다.'}, 'success');
@@ -113,6 +124,9 @@ export function boardController(angularModule){
 	        		}
 	        	})
 	        	.catch(function(error){})
+	        	.finally(function() {
+	        		$rootScope.isLoading = false;
+	        	})
         	})
         }
         
@@ -120,6 +134,8 @@ export function boardController(angularModule){
         $scope.openModifyBoard = function(no){
         	event.preventDefault();
         	$scope.setBoardWriteDate();
+        	
+        	$rootScope.isLoading = true;
         	boardService.getBoard(utils.cookieControl.getJwtCookie(), no)
         	.then(function(success){
         		$scope.modifyBoardForm.no = success.data.no;
@@ -129,6 +145,9 @@ export function boardController(angularModule){
             	$('#modifyBoardComponent').show();
         	})
         	.catch(function(){})
+        	.finally(function() {
+        		$rootScope.isLoading = false;
+        	})
         }
         
         $scope.closeModifyBoard = function(){
@@ -140,6 +159,8 @@ export function boardController(angularModule){
         
         $scope.modifyBoard = function(){
         	$scope.setBoardWriteDate();
+        	
+        	$rootScope.isLoading = true;
         	modifyBoardService.modifyBoard(utils.cookieControl.getJwtCookie(), $scope.modifyBoardForm)
         	.then(function(success){
         		$scope.alert({content1:'게시물 수정되었습니다.'}, 'success');
@@ -158,11 +179,15 @@ export function boardController(angularModule){
             	.catch(function(){})
         	})
         	.catch(function(error){})
+        	.finally(function() {
+        		$rootScope.isLoading = false;
+        	})
         }
         
         $(window).scroll(function(){
         	var scrolltop = $(window).scrollTop();
 			if( scrolltop == $(document).height() - $(window).height() ){
+				$rootScope.isLoading = true;
 				boardListService.getBoardMemberList($scope.boardListStart, $scope.boardListLength, $scope.boardMemberFilter)
 	        	.then(function(success){
 	        		for(let i in success.data){
@@ -170,7 +195,11 @@ export function boardController(angularModule){
 	        		}
 	        		$scope.boardListStart = $scope.boardListStart +  $scope.boardListLength;
 	            })
-	            .catch(function(error){console.log(error);});
+	            .catch(function(error){console.log(error);})
+				.finally(function() {
+					$rootScope.isLoading = false;
+				});
+				
 			}
 		});
         

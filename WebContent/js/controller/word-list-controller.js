@@ -35,6 +35,7 @@ export function listWordController(angularModule){
         }
         
         $scope.setWordList = function(jwt, start, length){
+        	$rootScope.isLoading = true;
         	getWordService.getWordList(utils.cookieControl.getJwtCookie(), $scope.wordListStart, $scope.wordListLength)
         	.then(function(success){
 	        		var wordList = success.data;
@@ -46,6 +47,9 @@ export function listWordController(angularModule){
 	    	.catch(function(error){
 	    		$scope.alert({content1:'error.message'}, 'danger');
 	    	})
+        	.finally(function() {
+        		$rootScope.isLoading = false;
+        	})
         }
         
         $scope.setWordList();
@@ -57,6 +61,8 @@ export function listWordController(angularModule){
 	        		'no': no,
 	        		'state': 0
 	        	}
+	        	
+	        	$rootScope.isLoading = true;
 	        	modifyWordService.modifyWordState(utils.cookieControl.getJwtCookie(), word)
 	        	.then(function(success){
 	        		$scope.alert({content1: '삭제가 완료되었습니다.'}, 'success');
@@ -70,6 +76,8 @@ export function listWordController(angularModule){
 	        		$scope.setWordList(utils.cookieControl.getJwtCookie(), $scope.wordListStart, 1);
 	        	}).catch(function(error){
 	        		$scope.alert({content1: '로그인 정보가 없습니다.'}, 'danger');
+	        	}).finally(function() {
+	        		$rootScope.isLoading = false;
 	        	})
         	})
         }
@@ -77,6 +85,7 @@ export function listWordController(angularModule){
         $(window).scroll(function(){
         	var scrolltop = $(window).scrollTop();
 			if( scrolltop == $(document).height() - $(window).height() ){
+				$rootScope.isLoading = true;
 				getWordService.getWordList(utils.cookieControl.getJwtCookie(), $scope.wordListStart, $scope.wordListLength)
 	        	.then(function(success){
 	        		var wordList = success.data;
@@ -88,6 +97,9 @@ export function listWordController(angularModule){
 		    	.catch(function(error){
 		    		$scope.alert({content1:'error.message'}, 'danger');
 		    	})
+				.finally(function() {
+					$rootScope.isLoading = false;
+				})
 			}
 		});
     })

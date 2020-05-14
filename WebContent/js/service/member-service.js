@@ -55,12 +55,40 @@ export function setMemberService(angularModule){
             return deferred.promise;
     	};
     	
-    	this.searchEmail = function(member){
-    		
-    	};
+    	this.searchMemberNickname = function(member){
+    		var deferred = $q.defer();
+    		$http({
+                method: 'POST',
+                url: server.contextPath + '/member/search/nickname',
+                headers: {'Content-Type': 'application/json; charset=utf-8'},
+                dateType: "text",
+                data: JSON.stringify(member)
+            })
+            .then(function successCallback(response) {
+                deferred.resolve(response);
+            }, function errorCallback(error) {
+            	deferred.resolve(error);
+            });
+            
+            return deferred.promise;
+    	}
     	
-    	this.searchPassowrd = function(member){
-    		
+    	this.searchMemberPassword = function(member){
+    		var deferred = $q.defer();
+    		$http({
+                method: 'POST',
+                url: server.contextPath + '/member/search/password',
+                headers: {'Content-Type': 'application/json; charset=utf-8'},
+                dateType: "text",
+                data: JSON.stringify(member)
+            })
+            .then(function successCallback(response) {
+                deferred.resolve(response);
+            }, function errorCallback(error) {
+            	deferred.resolve(error);
+            });
+            
+            return deferred.promise;
     	};
     })
     .service('joinMemberService', function($http, $q, server){
@@ -82,11 +110,11 @@ export function setMemberService(angularModule){
     	}
     })
     .service('loginMemberService', function($http, $q, server){
-    	this.login = function(loginMember){
+    	this.login = function(loginMember, autoLogin){
     		var deferred = $q.defer();
             $http({
                 method: 'POST',
-                url: server.contextPath + '/member/login',
+                url: server.contextPath + '/member/login/' + autoLogin,
                 headers: {'Content-Type': 'application/json; charset=utf-8'},
                 dateType: "text",
             	data: JSON.stringify(loginMember)
@@ -113,6 +141,23 @@ export function setMemberService(angularModule){
             	deferred.resolve(error);
             });
             return deferred.promise;
+    	}
+    	
+    	this.getRefreshJwt = function(jwt, minute){
+    		var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: server.contextPath + '/auth/jwt/refresh/'+minute,
+                headers: {'Content-Type': 'application/json; charset=utf-8',
+                			'jwt': jwt},
+            })
+            .then(function successCallback(response) {
+                deferred.resolve(response);
+            }, function errorCallback(error) {
+            	deferred.resolve(error);
+            });
+            return deferred.promise;
+    		
     	}
     })
     .service('getMemberService', function($http, $q, server){

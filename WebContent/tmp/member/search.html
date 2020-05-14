@@ -5,7 +5,7 @@
     <form autocomplete="off">
         <div class="form-group">
             <label for="nickname">닉네임 *</label>
-            <input type="text" class="form-control" id="nickname" placeholder="별명을 입력해주세요" auto>
+            <input type="text" class="form-control text-center" id="nickname" placeholder="별명을 입력해주세요" ng-model="searchEmailForm.nickname">
         </div>
        <div class="form-group">
             <label for="year">생년월일 *</label>
@@ -34,7 +34,7 @@
 	        </div>
         </div>
         <div class="w-100">
-            <button type="button" class="btn btn-warning w-100">이메일 검색</button>
+            <button type="button" class="btn btn-warning w-100" ng-click="searchEmail();">이메일 검색</button>
         </div>
     </form>
     
@@ -45,8 +45,8 @@
     </div>
     <form autocomplete="off">
         <div class="form-group">
-            <label for="email1">이메일 *</label>
-            <input type="email" class="form-control" id="email1" aria-describedby="emailHelp" placeholder="이메일을 입력해주세요">
+            <label for="email">이메일 *</label>
+            <input type="text" class="form-control text-center" id="email" aria-describedby="emailHelp" ng-model="searchPasswordForm.email" placeholder="이메일을 입력해주세요">
         </div>
         <div class="form-group">
             <label for="year">생년월일 *</label>
@@ -75,7 +75,7 @@
 	        </div>
         </div>
         <div class="w-100">
-            <button type="button" class="btn btn-warning w-100">비밀번호 발송</button>
+            <button type="button" class="btn btn-warning w-100" ng-click="searchPassword();">비밀번호 발송</button>
         </div>
     </form>
 </div>

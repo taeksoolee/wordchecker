@@ -5,6 +5,31 @@ var server = {contextPath: '/wordchecker-server'};
 export const angularModule 
 	= angular.module('wordCheckerApp', ['ngRoute', 'ngAnimate'])
 	.constant('server', server)
+	.filter('timeFormatToTimestamp', function(){
+		return function(input){
+			if(input == undefined){
+				return ''
+			}
+			
+			if(input < -9999){
+				return '99:99:99'
+			}
+			
+			var second = parseInt(input/1000);
+			
+			var minute = parseInt(second/60);
+			second = second%60;
+			
+			var hour = parseInt(minute/60);
+			minute = minute%60;
+			
+			second = (second<10)?('0'+second):second;
+			minute = (minute<10)?('0'+minute):minute;
+			hour = (hour<10)?('0'+hour):hour;
+			
+			return hour + ":" + minute + ":" + second; 
+		}
+	})
 	.filter('time', function(){
 		return function(input){
 			return (input>9)?input:'0'+input;

@@ -108,7 +108,7 @@ export function testWordController(angularModule){
         	var dates = $scope.wordTestFilter.writeDate.split(' > ');
         	$scope.wordTestFilter.startDate = dates[0];
         	$scope.wordTestFilter.endDate = dates[1];
-        	
+        	$rootScope.isLoading = true;
         	getWordService.getWordTestList(utils.cookieControl.getJwtCookie(), $scope.wordTestFilter, $scope.testOrder)
 	    	.then(function(success){
 	    		if(success.data.length == 0){
@@ -140,6 +140,9 @@ export function testWordController(angularModule){
 			.catch(function(error){
 				$scope.alert({content1:'error.message'}, 'danger');
 			})
+        	.finally(function() {
+        		$rootScope.isLoading = false;
+        	})
         }
         
         $scope.testSubmit = function(){
@@ -160,8 +163,6 @@ export function testWordController(angularModule){
         $scope.setRight = function(){
         	$scope.testResult = getDefualtTestResult();
 			for(let i in $scope.wordTestAnswerList){
-				console.log($scope.wordTestAnswerList[i][$scope.testType]);
-				console.log($scope.wordTestList[i][$scope.testType]);
 				if($scope.wordTestAnswerList[i][$scope.testType] == $scope.wordTestList[i][$scope.testType]){
 					$scope.testResult.judgeList.push(true);
 					$scope.testResult.rightWordNumber = $scope.testResult.rightWordNumber + 1; 

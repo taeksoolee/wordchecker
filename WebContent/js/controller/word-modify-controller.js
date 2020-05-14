@@ -7,6 +7,7 @@ export function modifyWordController(angularModule){
         
         $scope.openModifyWord = function(wordNo){
         	event.preventDefault();
+        	$rootScope.isLoading = true;
         	getWordService.getWord(utils.cookieControl.getJwtCookie(), wordNo)
         	.then(function(success){
         		$scope.modifyWordForm = success.data;
@@ -14,7 +15,9 @@ export function modifyWordController(angularModule){
         		$('#modifyWordComponent').show();
                 $('.black-screen').show();
         	})
-        	.catch(function(error){})
+        	.catch(function(error){}).finally(function() {
+        		$rootScope.isLoading = false;
+        	})
         	
             
         }
@@ -50,6 +53,7 @@ export function modifyWordController(angularModule){
         	
         	
             $scope.confirm('확인 메시지', '선택하신 단어를 수정하시겠습니까?', function(){
+            	$rootScope.isLoading = true;
             	modifyWordService.modifyWord(utils.cookieControl.getJwtCookie(), $scope.modifyWordForm)
             	.then(function(success){
             		$scope.alert({content1:'단어 수정을 완료하였습니다.'}, 'success');
@@ -64,7 +68,9 @@ export function modifyWordController(angularModule){
             		
             		$scope.closeModifyWord();
             	})
-            	.catch(function(error){})
+            	.catch(function(error){}).finally(function() {
+            		$rootScope.isLoading = false;
+            	})
             }); 
         }
     })

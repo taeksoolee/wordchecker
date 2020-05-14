@@ -53,6 +53,7 @@ export function addWordController(angularModule){
         	
         	
         	$scope.confirm('확인 메시지', '단어를 등록 하시겠습니까?', function(){
+        		$rootScope.isLoading = true;
 	        	addWordService.addWordList($scope.wordList, utils.cookieControl.getJwtCookie())
 	        	.then(function(success){
 	        		$scope.wordList = defaultWordFactory.getWordList();
@@ -62,6 +63,9 @@ export function addWordController(angularModule){
 		    	.catch(function(error){
 		    		$scope.alert({content1:'error.message'}, 'danger');
 		    	})
+	        	.finally(function() {
+	        		$rootScope.isLoading = false;
+	        	})
         	})
         }
     });
