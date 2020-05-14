@@ -93,19 +93,38 @@ export function setWordService(angularModule){
             return deferred.promise;
     	}
     	
-    	 this.getWord = function(jwt, wordNo){
-             var deferred = $q.defer();
-             $http({
-                 method: 'GET',
-                 url: server.contextPath + '/auth/word/no/'+wordNo,
-                 headers: {'Content-Type': 'application/json',
-             		'jwt': jwt}
-             }).then(function successCallback(response) {
-                 deferred.resolve(response);
-             }, function errorCallback(error) {
-             	deferred.resolve(error);
-             });
-             return deferred.promise;
-         }
+		this.getWord = function(jwt, wordNo){
+		    var deferred = $q.defer();
+		    $http({
+		        method: 'GET',
+		        url: server.contextPath + '/auth/word/no/'+wordNo,
+		        headers: {'Content-Type': 'application/json',
+		    		'jwt': jwt}
+		    }).then(function successCallback(response) {
+		        deferred.resolve(response);
+		    }, function errorCallback(error) {
+		    	deferred.resolve(error);
+		    });
+		    return deferred.promise;
+		}
+		
+		
+		this.getWordTestList = function(jwt, filter, order){
+			var deferred = $q.defer();
+		    $http({
+		         method: 'POST',
+		         url: server.contextPath + '/auth/word/test/'+order,
+		         headers: {'Content-Type': 'application/json; charset=utf-8',
+		         			'jwt': jwt},
+				dateType: "text",
+		     	data: JSON.stringify(filter)
+		     })
+		     .then(function successCallback(response) {
+		         deferred.resolve(response);
+		     }, function errorCallback(error) {
+		     	throw new Error(error);
+		     });
+		     return deferred.promise;
+		}
     });
 }

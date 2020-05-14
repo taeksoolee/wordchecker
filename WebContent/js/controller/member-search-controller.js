@@ -6,8 +6,8 @@ export function searchMemberController(angularModule){
         utils.navControl.closeNav();
         dateSetService.setDateSelect();
         
-        $scope.searchEmail = defaultMemberFactory.searchEmail;
-        $scope.searchPassword = defaultMemberFactory.searchPassword;
+        $scope.searchEmail = defaultMemberFactory.getSearchEmail();
+        $scope.searchPassword = defaultMemberFactory.getSearchPassword();
         
         $scope.birthday = {
         		email: {

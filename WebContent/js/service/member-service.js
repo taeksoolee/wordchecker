@@ -53,7 +53,15 @@ export function setMemberService(angularModule){
             });
             
             return deferred.promise;
-    	}
+    	};
+    	
+    	this.searchEmail = function(member){
+    		
+    	};
+    	
+    	this.searchPassowrd = function(member){
+    		
+    	};
     })
     .service('joinMemberService', function($http, $q, server){
     	this.join = function(joinMember){

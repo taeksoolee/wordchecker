@@ -5,6 +5,16 @@ var server = {contextPath: '/wordchecker-server'};
 export const angularModule 
 	= angular.module('wordCheckerApp', ['ngRoute', 'ngAnimate'])
 	.constant('server', server)
+	.filter('time', function(){
+		return function(input){
+			return (input>9)?input:'0'+input;
+		}
+	})
+	.filter('nullString', function(){
+		return function(input){
+			return (input==undefined)?"-":input;
+		}
+	})
 	.provider('utils', function(){
 		this.$get = function(){
 			return {

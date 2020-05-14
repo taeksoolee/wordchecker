@@ -20,21 +20,20 @@ export function boardFilterController(angularModule){
          	$scope.closeFilterBoard();
          }
     	
-    	var $drp = $('.drp');
-    	var now = new Date();
-    	var today = (now.getYear()+1900) + '-' + (now.getMonth()+1) + '-' + now.getDate();
-    	
-    	
-    	$(function() {
-    		$('.drp').daterangepicker({
-    			autoUpdateInput: true,
-    			startDate: '2020-01-01',
-    			endDate: today,
-    			"locale": {
-    		        "format": "YYYY-MM-DD",
-    		        "separator": " > "
-    			}
-    		}, function(start, end, label) {});
-    	});
+         var now = new Date();
+     	var startDate = (now.getYear()+1900) + '-' + (now.getMonth()) + '-' + now.getDate();
+     	var endDate = (now.getYear()+1900) + '-' + (now.getMonth()+1) + '-' + now.getDate();
+     	
+     	$(function() {
+     		$('.drp').daterangepicker({
+     			"autoUpdateInput": true,
+     			"startDate": startDate,
+     			"endDate": endDate,
+     			"locale": {
+     		        "format": "YYYY-MM-DD",
+     		        "separator": " > "
+     			}
+     		}, function(start, end, label) {});
+     	});
     });
 }
