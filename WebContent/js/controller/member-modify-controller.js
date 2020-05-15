@@ -3,10 +3,18 @@ export function modifyMemberController(angularModule){
     .controller('ModifyMemberController', function($rootScope, $scope ,$interval ,utils , dateSetService, defaultMemberFactory, getMemberService, searchMemberService, modifyMemberService){
     	$rootScope.afterLoginUrl = '/member/modify';
     	
-    	if(!$rootScope.isLogin){
-    		$scope.alert({content1:'로그인 후 이용해주세요.'}, 'danger');
-    		utils.goRouting($rootScope.loginUrl);
-    	}
+    	$scope.loginInterval = $interval(function(){
+    		if($rootScope.completeLoginCheck){
+    			$interval.cancel($scope.loginInterval);
+    			if(!$rootScope.isLogin){
+    	    		$scope.alert({content1:'로그인 후 이용해주세요.'}, 'danger');
+    	    		utils.goRouting($rootScope.loginUrl);
+    	    	}
+    		}
+    	})
+    	
+    	
+    	
     	
    		utils.navControl.closeNav();
    		dateSetService.setDateSelect();
@@ -109,8 +117,6 @@ export function modifyMemberController(angularModule){
 		    if($scope.processBool && input.email!=""){
 	        	searchMemberService.searchMemberNickname({'nickname': input.nickname})
 	            .then(function(success){
-	            	console.log(input.nickname);
-	            	console.log(success.data.nickname);
 	            	if(tempModifyMemberForm.nickname != success.data.nickname && success.data.nickname != ""){
             			$scope.alert({content1:'중복되는 닉네임이 존재합니다!'}, 'danger');
             			$scope.processBool = false;

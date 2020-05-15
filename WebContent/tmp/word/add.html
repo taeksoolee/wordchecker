@@ -7,13 +7,13 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">단어 갯수</span>
             </div>
-            <input type="number" name="wordCnt" class="form-control" aria-label="wordCount" ng-model="wordCnt" ng-change="changeWordCnt()" min="1" max="100"/>
+            <input type="number" name="wordCnt" class="form-control" aria-label="wordCount" ng-model="wordCnt" ng-change="changeWordCnt()" />
             <div class="input-group-append">
                 <span class="input-group-text">개</span>
             </div>
         </div>
     </div>
-    <div class="form-row align-items-center mt-3 mb-3" ng-repeat="word in wordList">
+    <div class="form-row align-items-center mt-3 mb-3" ng-repeat="word in wordAddList">
         <div class="col-12 col-sm-6 mt-1">
             <label class="sr-only" for="speling">스펠링</label>
             <div class="input-group">

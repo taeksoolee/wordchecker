@@ -81,12 +81,14 @@ export function boardController(angularModule){
         		$rootScope.isLoading = true;
 	        	addBoardService.addBoard(utils.cookieControl.getJwtCookie(), $scope.addBoardForm)
 	        	.then(function(success){
+	        		console.log(success);
 	        		if(success.message == undefined){
 	        			$scope.alert({content1:'게시물 등록이 완료되었습니다.'}, 'success');
 	        			$scope.closeAddBoard();
 	        			$scope.addBoardForm = defaultBoardFactory.getDefaultAddBoard();
 	        			boardListService.getBoardMemberList(0, 1, $scope.boardMemberFilter)
 	                	.then(function(success){
+	                		console.log(success)
 	                		for(let i in success.data){
 	                			$scope.boardMemberList.splice(0,0,success.data[i]);
 	                		}

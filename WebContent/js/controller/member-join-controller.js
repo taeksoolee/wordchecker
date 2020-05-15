@@ -68,7 +68,6 @@ export function joinMemberController(angularModule){
 	        		$scope.alert({content1:'별명 형식을 확인해주세요.'}, 'danger');
 	        		$scope.processBool = false;
 	        	}
-	        	console.log(input.birthday);
 	        	if(!utils.validation.member.birthday(input.birthday)){
 	        		$scope.alert({content1:'생년월일 형식이 맞지 않습니다.'}, 'danger');
 	        		$scope.processBool = false;

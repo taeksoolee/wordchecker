@@ -8,7 +8,7 @@ export function modalController(angularModule){
         $scope.alertModal = defualtModalFactory.alert;
         
         $scope.alert = function(alertObj, type){
-        	var topNo = 0;
+        	var topNo = 0;$
         	for(let i in $scope.alertList){
         		topNo = $scope.alertList[i].no>topNo?$scope.alertList[i].no:topNo;
         	}

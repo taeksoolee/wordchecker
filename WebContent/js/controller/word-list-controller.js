@@ -1,12 +1,17 @@
 export function listWordController(angularModule){
     angularModule
-    .controller('ListWordController', function($rootScope, $scope, utils, defaultWordFactory, getWordService, modifyWordService){
+    .controller('ListWordController', function($rootScope, $scope, $interval, utils, defaultWordFactory, getWordService, modifyWordService){
     	$rootScope.afterLoginUrl = '/word/list';
     	
-    	if(!$rootScope.isLogin){
-    		$scope.alert({content1:'로그인 후 이용해주세요.'}, 'danger');
-    		utils.goRouting($rootScope.loginUrl);
-    	}
+    	$scope.loginInterval = $interval(function(){
+    		if($rootScope.completeLoginCheck){
+    			$interval.cancel($scope.loginInterval);
+    			if(!$rootScope.isLogin){
+    	    		$scope.alert({content1:'로그인 후 이용해주세요.'}, 'danger');
+    	    		utils.goRouting($rootScope.loginUrl);
+    	    	}
+    		}
+    	})
     	
         utils.navControl.closeNav();
         
@@ -26,21 +31,18 @@ export function listWordController(angularModule){
         
         $scope.checkWordBookmark = function(no){
         	if(no == undefined){
-        		console.log(no);
         		$rootScope.wordBookmark = -1;
         	}else{
-        		console.log(no);
         		$rootScope.wordBookmark = no;
         	}
         }
         
-        $scope.setWordList = function(jwt, start, length){
+        $scope.setWordList = function(){
         	$rootScope.isLoading = true;
         	getWordService.getWordList(utils.cookieControl.getJwtCookie(), $scope.wordListStart, $scope.wordListLength)
         	.then(function(success){
-	        		var wordList = success.data;
-	        		for(let i in wordList){
-	        			$scope.wordList.push(wordList[i]);
+	        		for(let i in success.data){
+	        			$scope.wordList.push(success.data[i]);
 	        		}
 	        		$scope.wordListStart = $scope.wordListStart + $scope.wordListLength;
 	    	})
@@ -88,9 +90,8 @@ export function listWordController(angularModule){
 				$rootScope.isLoading = true;
 				getWordService.getWordList(utils.cookieControl.getJwtCookie(), $scope.wordListStart, $scope.wordListLength)
 	        	.then(function(success){
-	        		var wordList = success.data;
-	        		for(let i in wordList){
-	        			$scope.wordList.push(wordList[i]);
+	        		for(let i in success.data){
+	        			$scope.wordList.push(success.data[i]);
 	        		}
 	        		$scope.wordListStart = $scope.wordListStart + $scope.wordListLength;
 		    	})

@@ -1,6 +1,6 @@
 export function modifyWordController(angularModule){
     angularModule
-    .controller('ModifyWordController', function($scope, utils, defaultWordFactory, getWordService, modifyWordService){
+    .controller('ModifyWordController', function($rootScope, $scope, utils, defaultWordFactory, getWordService, modifyWordService){
     	
         $scope.modifyWordForm = defaultWordFactory.getWord();
         var originModifyWordForm = {};

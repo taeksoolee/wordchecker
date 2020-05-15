@@ -3,10 +3,15 @@ export function testWordController(angularModule){
     .controller('TestWordController', function($rootScope, $scope, $interval, utils, getWordService){
     	$rootScope.afterLoginUrl = '/word/test';
     	
-    	if(!$rootScope.isLogin){
-    		$scope.alert({content1:'로그인 후 이용해주세요.'}, 'danger');
-    		utils.goRouting($rootScope.loginUrl);
-    	}
+    	$scope.loginInterval = $interval(function(){
+    		if($rootScope.completeLoginCheck){
+    			$interval.cancel($scope.loginInterval);
+    			if(!$rootScope.isLogin){
+    	    		$scope.alert({content1:'로그인 후 이용해주세요.'}, 'danger');
+    	    		utils.goRouting($rootScope.loginUrl);
+    	    	}
+    		}
+    	})
     	
         utils.navControl.closeNav();
         
@@ -105,6 +110,8 @@ export function testWordController(angularModule){
         
         
         $scope.test = function(){
+        	console.log($scope.wordTestFilter);
+        	console.log($scope.testOrder);
         	var dates = $scope.wordTestFilter.writeDate.split(' > ');
         	$scope.wordTestFilter.startDate = dates[0];
         	$scope.wordTestFilter.endDate = dates[1];
@@ -161,6 +168,10 @@ export function testWordController(angularModule){
         
         
         $scope.setRight = function(){
+        	for(let i in $scope.testResult){
+        		$scope.testResult.speling = $scope.testResult.speling.toLowerCase();
+        	}
+        	
         	$scope.testResult = getDefualtTestResult();
 			for(let i in $scope.wordTestAnswerList){
 				if($scope.wordTestAnswerList[i][$scope.testType] == $scope.wordTestList[i][$scope.testType]){
