@@ -24,7 +24,6 @@ export function searchMemberController(angularModule){
         
         $scope.searchEmail = function(){
         	$scope.processBool = true;
-        	
         	if($scope.searchEmailForm.nickname == ""){
         		$scope.alert({content1:'별명을 입력해주세요.'}, 'warning');
         		$scope.processBool = false;
@@ -75,6 +74,7 @@ export function searchMemberController(angularModule){
         	$rootScope.isLoading = true;
         	searchMemberService.searchMemberPassword($scope.searchPasswordForm)
         	.then(function(success){
+        		console.log(success);
         		if(success.data.result == 1){
         			$scope.alert({content1:'임시 비밀번호를 요청하신 메일로 발송하였습니다.'}, 'success');
         			$scope.searchEmailForm = defaultMemberFactory.getSearchEmail();
@@ -93,7 +93,11 @@ export function searchMemberController(angularModule){
         	        		}
         	        }
         		}else{
-        			$scope.alert({content1:'메일발송에 실패하였습니다.'}, 'warning');
+        			if(success.data.message=="memeberNotFound"){
+        				$scope.alert({content1:'일치하는 회원이 존재하지 않습니다.'}, 'danger');
+        			}else{
+        				$scope.alert({content1:'메일발송에 실패하였습니다.'}, 'warning');
+        			}
         		}
 	    	})
 	    	.catch(function(error){

@@ -84,7 +84,7 @@ export function testWordController(angularModule){
         
         var $testTimer = $('#testTimer');
         $(window).scroll(function(){
-        	var y = ((window.pageYOffset<200?0:window.pageYOffset-190))+'px';
+        	var y = ((window.pageYOffset<200?0:window.pageYOffset-250))+'px';
         	$testTimer.animate({top: y}, 7);
 		});
         
@@ -110,8 +110,6 @@ export function testWordController(angularModule){
         
         
         $scope.test = function(){
-        	console.log($scope.wordTestFilter);
-        	console.log($scope.testOrder);
         	var dates = $scope.wordTestFilter.writeDate.split(' > ');
         	$scope.wordTestFilter.startDate = dates[0];
         	$scope.wordTestFilter.endDate = dates[1];
@@ -157,6 +155,7 @@ export function testWordController(angularModule){
 			$scope.onTest = false;
 			$scope.setRight();
 			$scope.testResult.exist = true;
+			console.log($scope.testResult.exist);
         }
         
         $scope.wordTestSubmit = function(){
@@ -169,7 +168,7 @@ export function testWordController(angularModule){
         
         $scope.setRight = function(){
         	for(let i in $scope.testResult){
-        		$scope.testResult.speling = $scope.testResult.speling.toLowerCase();
+        		$scope.testResult.speling = $scope.testResult.speling!=undefined?$scope.testResult.speling.toLowerCase():$scope.testResult.speling;
         	}
         	
         	$scope.testResult = getDefualtTestResult();

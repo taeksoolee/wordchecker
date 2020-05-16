@@ -41,10 +41,12 @@ export function listWordController(angularModule){
         	$rootScope.isLoading = true;
         	getWordService.getWordList(utils.cookieControl.getJwtCookie(), $scope.wordListStart, $scope.wordListLength)
         	.then(function(success){
-	        		for(let i in success.data){
-	        			$scope.wordList.push(success.data[i]);
-	        		}
-	        		$scope.wordListStart = $scope.wordListStart + $scope.wordListLength;
+        		
+        		for(let i in success.data){
+        			$scope.wordList.push(success.data[i]);
+        		}
+        		
+        		$scope.wordListStart = $scope.wordListStart + $scope.wordListLength;
 	    	})
 	    	.catch(function(error){
 	    		$scope.alert({content1:'error.message'}, 'danger');

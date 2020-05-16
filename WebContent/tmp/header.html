@@ -36,7 +36,7 @@
 	    <form class="form-inline my-2 my-lg-0">
 	    	<div class="mr-3 text-white" ng-if="tokenExpirationPeriod!=undefined">
 	    		<span>{{tokenExpirationPeriod | timeFormatToTimestamp}} &nbsp;</span> 
-	    		<span><a href="#/" class="text-primary" ng-click="refreshLogin(30);">로그인 30분 연장</a></span>
+	    		<span><a href="#/" class="text-hover" ng-click="refreshLogin(30);">로그인 30분 연장</a></span>
 	    	</div>
 	    </form>
     </div>

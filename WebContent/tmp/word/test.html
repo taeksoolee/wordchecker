@@ -75,35 +75,42 @@
     </div>
     
     <div ng-show="!onTest && testResult.exist">
-	 	<div>
+	 	<div class="text-center">
 	 		<strong>테스트 결과</strong>
-	 		({{testResult.rightWordNumber}} / {{testResult.judgeList.length}}[정답/전체])
-	 		<p class="ml-2"><a href="#" ng-click="resultReset();" class="text-primary">다시시험보러 가기</a></p>
+	 		<div>
+	 			<span><span class="display-4">{{testResult.rightWordNumber}}</span>/{{testResult.judgeList.length}} 점</span>
+	 		</div>
+	 		<p class="ml-2"><a href="#" ng-click="resultReset();" class="text-hover">다시시험보러 가기</a></p>
 	 	</div>
 	 	<div>
-		 	<div ng-repeat="answerWord in wordTestAnswerList" class="border mt-2 mb-2">
+		 	<div ng-repeat="answerWord in wordTestAnswerList" class="mt-2 mb-2">
 			 	<div>
-			 		<div class="ml-4" ng-show="testResult.judgeList[$index]">o</div>
-			 		<div class="ml-4 text-danger" ng-hide="testResult.judgeList[$index]">x</div>
-			 		<div class="row border">
-			 			<div class="col-12 col-sm-4 p-0 text-center">
+			 		<div class="row">
+			 			<div class="col-12">
+			 				 {{$index}}.
+				 			<span class="ml-4" ng-show="testResult.judgeList[$index]">o</span>
+				 			<span class="ml-4 text-danger" ng-hide="testResult.judgeList[$index]">x</span>
+				 		</div>
+			 		</div>
+			 		<div class="row mb-1">
+			 			<div class="col-12 col-sm-4 p-0 text-center border bg-light">
 			 				정답
 			 			</div>
-			 			<div class="col-12 col-sm-4 p-0 text-center">
+			 			<div class="col-12 col-sm-4 p-0 text-center border">
 			 				{{answerWord.speling | nullString}}
 			 			</div>
-			 			<div class="col-12 col-sm-4 p-0 text-center">
+			 			<div class="col-12 col-sm-4 p-0 text-center border">
 			 				{{answerWord.meaning | nullString}}
 			 			</div>
 			 		</div>
-			 		<div class="row border">
-			 			<div class="col-12 col-sm-4 p-0 text-center">
+			 		<div class="row">
+			 			<div class="col-12 col-sm-4 p-0 text-center border bg-light">
 			 				입력
 			 			</div>
-			 			<div class="col-12 col-sm-4 p-0 text-center">
+			 			<div class="col-12 col-sm-4 p-0 text-center border">
 			 				{{wordTestList[$index].speling | nullString}}
 			 			</div>
-			 			<div class="col-12 col-sm-4 p-0 text-center">
+			 			<div class="col-12 col-sm-4 p-0 text-center border">
 			 				{{wordTestList[$index].meaning | nullString}}
 			 			</div>
 			 		</div>

@@ -132,6 +132,9 @@ a{
 .h-200px{
 	height: 200px !important;
 }
+.h-55px{
+	height: 55px !important;
+}
 
 #toTop{
 	position: fixed;
@@ -173,4 +176,12 @@ a{
     font-size: 20px;
     line-height: 39px;
     color: white;
+}
+
+.text-hover{
+	color: #007bff !important;
+}
+.text-hover:hover{
+	color: #28a745 !important;
+	text-decoration: none;
 }
